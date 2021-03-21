@@ -1,0 +1,124 @@
+$theme-colors: (
+    "g-dark": #272838,
+    "g-wenge": #775253,
+    "g-dust": #9D5C63,
+    "g-gray": #D1D3C4,
+    "g-white": #DDF8E8,
+    "orange": #ee7d1a,
+    "g-gray-2": #A2A2A2,
+    "g-gray-3": #E9E9E9
+);
+
+@import '../../../node_modules/bootstrap/scss/bootstrap.scss';
+
+@import 'modules.scss';
+
+
+.hide {
+    display: none;
+}
+
+.form-errors {
+    display: block;
+    width: 100%;
+    padding: 5px 0px;
+    overflow: auto;
+}
+.form-errors .badge {
+    padding: 10px;
+    font-size: 1rem;
+    text-shadow: 1px 2px 3px black;
+}
+
+@media all and (max-width: 500px) {
+    .form-errors .badge {
+        font-size: 12px;
+        padding: 5px;
+    }
+}
+@media all and (max-width: 360px) {
+    .form-errors .badge {
+        padding: 2px;
+        font-size: 11px;
+    }
+}
+.input-group {
+    height: 100% !important;
+}
+
+.custom-file-label::after {
+    content: 'Parcourir';
+}
+ 
+input:required {
+    border-bottom: solid 2px rgba(255, 0, 0, 0.658);
+} 
+
+.ico {
+    transition: all .5s;
+}
+
+.ico-danger:hover {
+    color: $danger !important;
+}
+.ico-success:hover {
+    color: $success !important;
+}
+.ico-info:hover {
+    color: $info !important;
+}
+.ico-warning:hover {
+    color: $warning !important;
+}
+.small-caps {
+    font-variant: small-caps;
+}
+.spacing-2 {
+    letter-spacing: 2px;
+}
+.font-normal {
+    font-weight: normal;
+}
+.font-italic {
+    font-style: italic;
+}
+.list-group-transparent .list-group-item {
+    background: transparent;
+    border: none;
+}
+
+.size-12 {
+    font-size: 12px !important;
+}
+
+.product-left-col {
+    transition: all .3s;
+    margin: 0 auto;
+  }
+  .product-right-col {
+    transition: all .3s;
+    margin: 0 auto;
+  }
+  @media all and (max-width: 1717px) {
+    
+    .product-left-col {
+      max-width: 80%;
+      flex: 0 0 80%;
+    }
+    .product-right-col {
+      max-width: 80%;
+      flex: 0 0 80%;
+    }
+  }
+  
+  @media all and (max-width: 1102px) {
+    
+    .product-left-col {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+    .product-right-col {
+      max-width: 100%;
+      flex: 0 0 100%;
+    }
+  }

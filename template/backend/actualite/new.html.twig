@@ -1,0 +1,187 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="h3 col-lg-8 col-md-10 col-sm-12 mx-auto my-3">
+    <i class="fas fa-plus-circle"></i>
+    Nouvelle actualité
+</h1>
+<form action="#" method="POST" class="col-lg-8 col-md-10 col-sm-12 mx-auto mt-2 mb-5" enctype="multipart/form-data">
+    <div class="form-row">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="title" class="input-group-text">Titre</label>
+            </div>
+            <input type="text" name="title" data-form="title" data-help="titleHelp" placeholder="Titre de la page" required id="title" class="form-control form-count" data-min="3" data-max="80"
+            {% if request.post('title') %}
+                value="{{ request.post('title') }}"
+            {% endif %}>
+            <span id="titleHelp" class="form-text text-muted">
+                <i class="fas fa-info-circle"></i>
+                Le titre doit être compris entre 3 et 80 caractères.
+            </span>
+            {% if form.errors('title') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('title') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12 bg-g-dark py-2 rounded mb-3">
+            <div class="row">
+                <h2 class="h5 col-12 text-white">
+                    <i class="fas fa-search"></i>
+                    Référencement
+                </h2>
+                <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <label for="meta_title" class="input-group-text">Meta titre</label>
+                    </div>
+                    <input type="text" name="meta_title" data-form="title" data-help="metatitleHelp" data-min="3" data-max="80" id="meta_title" required placeholder="Titre utilisé pour le référencement" class="form-control form-count"
+                    {% if request.post('meta_title') %}
+                        value="{{ request.post('meta_title') }}"
+                    {% endif %}>
+                    <span id="metatitleHelp" class="form-text text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        Le meta titre doit être compris entre 3 et 80 caractères.
+                    </span>
+                    {% if form.errors('meta_title') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('meta_title') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group col-12">
+                    <label for="meta_description" class="text-white">Meta description</label>
+                    {% if request.post('meta_description') %}
+                        {% set textarea = request.post('meta_description', false) %}
+                    {% else %}
+                        {% set textarea = '' %}
+                    {% endif %}
+                    <textarea name="meta_description" data-help="metadescHelp" data-form="meta-desc" data-min="10" data-max="165" required id="meta_description" rows="5" class="form-control form-count" placeholder="Description utilisé pour le référencement">{{ textarea }}</textarea>
+                    <span id="metadescHelp" class="form-text text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        La meta description doit être comprise entre 10 et 165 caractères.
+                    </span>
+                    {% if form.errors('meta_description') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('meta_description') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-12">
+            <div class="form-row">
+                <div class="input-group mb-3 col-lg-8 col-12">
+                    <div class="input-group-prepend">
+                        <label for="event_date" class="input-group-text">
+                            <i class="fas fa-calendar-day mr-1"></i>
+                            Date de l'événement
+                        </label>
+                    </div>
+                    <input type="date" name="event_date" id="event_date" class="form-control"
+                    {% if request.post('event_date') %}
+                        value="{{ request.post('event_date')|date("Y-m-d") }}"
+                    {% endif %}>
+                    {% if form.errors('event_date') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('event_date') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group col">
+                    <input type="checkbox" name="on_homepage" data-toggle="toggle" data-on="Activer sur homepage" data-width="210" data-height="50" data-off="Désactiver sur homepage" data-onstyle="success" data-offstyle="danger" {% if request.post('on_homepage') or request.data('on_homepage') == '1' %}
+                        checked
+                    {% endif %}>
+                </div>
+            </div>
+        </div>
+        {% if request.post('chapo') %}
+            {% set textarea = request.post('chapo', false) %}
+        {% else %}
+            {% set textarea = '' %}
+        {% endif %}
+        <div class="form-group col-12">
+            <label for="description">Chapô</label>
+            <textarea name="chapo" id="chapo" data-form="chapo" data-help="chapoHelp" data-min="0" data-max="115" cols="10" rows="2" placeholder="Texte pour la page d'accueil" class="form-control form-count">{{ textarea }}</textarea>
+            <span id="chapoHelp" class="form-text form-muted">
+                <i class="fas fa-info-circle"></i>
+                Le chapô est utilisé pour le listing des actualités et lorsqu'une actualité est utilisée pour le diaporama.<br />
+                115 caractères maximum.
+            </span>
+            {% if form.errors('chapo') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('chapo') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group col-12 mb-3">
+            <label for="my-selector">Contenu</label>
+            {% if request.post('content') %}
+                {% set textarea = request.post('content', false) %}
+            {% else %}
+                {% set textarea = '' %}
+            {% endif %}
+            <textarea name="content" id="my-selector" class="form-control" rows="20">{{ textarea }}</textarea>
+            {% if form.errors('content') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('content') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12 mx-auto bg-g-dark text-white mb-5 mt-2 py-2">
+            <div class="form-row">
+                <h2 class="h5 col-12">
+                    <i class="fas fa-images"></i>
+                    Images mise en avant
+                </h2>
+                <div class="col-12">
+                    <div class="row">
+                        <h3 class="h5 col-12">Image mise en avant</h3>
+                        <div class="form-group mb-3 col-lg-6 col-12">
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="image">Aucun fichier sélectionné</label>
+                                <input type="file" name="image" id="image" class="hide custom-input-file">
+                            </div>
+                            {% if form.errors('image') is not empty %}
+                                <div class="form-errors">
+                                    <span class="badge badge-danger">{{ form.errors('image') }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="input-group mb-3 col-lg-6 col-12">
+                            <div class="input-group-prepend">
+                                <label for="alt" class="input-group-text">Balise alt</label>
+                            </div>
+                            <input type="text" name="alt" data-form="title" data-help="altHelp" data-min="3" data-max="75" maxlength="75" id="alt" placeholder="Nom de l'image" class="form-control form-count"
+                            {% if request.post('alt') %}
+                                value="{{ request.post('alt') }}"
+                            {% else %}
+                                value="{{ product.alt }}"
+                            {% endif %}
+                            >
+                            <span id="altHelp" class="form-text text-muted">
+                                L'attribut alt doit être compris entre 3 et 75 caractères.
+                            </span>
+                            {% if form.errors('alt') is not empty %}
+                                <div class="form-errors">
+                                    <span class="badge badge-danger">{{ form.errors('alt') }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="preview-parent col-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-12 text-right">
+            <input type="submit" value="Créer" class="btn btn-success">
+        </div>
+    </div>
+</form>
+{% endblock body %}
+
+{% block javascripts %}
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/assets/js/tinymce.js"></script>
+<script src="/assets/js/form.js"></script>
+{% endblock javascripts %}

@@ -1,0 +1,20 @@
+<div class="row">
+    {% if product.image is not null %}
+    <div class="col-lg-12 col-md-12 col-sm-5 mx-auto mb-3 diapo-1" id="diapo-main">
+        <img src="/upload/img/{{ product.image }}" data-zoom="/upload/img/r-{{ product.image }}" alt="{{ product.alt }}" class="img-fluid" id="g-zoom">
+    </div>
+    {% endif %}
+    <div class="col-12">
+        {% if galleries is not empty %}
+        <div class="row" id="diapo-gallery">
+            {% set compteur = 2 %}    
+            {% for key, gallerie in galleries %}
+                <div class="col-lg-4 col-md-5 col-sm-3 col-3 diapo-elm diapo-{{ compteur }}">
+                    <img src="/upload/img/{{ gallerie.image.path }}" data-zoom="/upload/img/r-{{ gallerie.image.path }}" alt="{{ gallerie.image.alt }}" class="img-fluid">
+                </div>    
+            {% set compteur = compteur + 1 %}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>

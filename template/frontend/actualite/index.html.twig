@@ -1,0 +1,57 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block meta_description %}
+    <meta description="LCI Packaging">
+{% endblock meta_description %}
+
+{% block head_block %}
+<blockquote class="h1 col-lg-8 col-12 mx-auto text-white main-title">
+    <div class="row py-2">
+        <div class="col-10 col-12 text-center text-lg-left offset-lg-2">
+            L'Art et la Matière ®
+        </div>
+        <div class="h2 col-10 col-12 second-main-title text-center text-lg-left offset-lg-2">
+            Actualités
+        </div>
+    </div>
+</blockquote>
+{% endblock head_block %}
+
+{% block main_content %}
+<section class="col-lg-11 col-12 mx-auto content-view">
+    <div class="row">
+        <h1 class="h1 actu-h1 main col-12 my-3">
+            Actualités
+        </h1>
+        {% for actualite in actualites %}
+        <div class="col-12 my-3">
+            <div class="row">
+                {% set actCol = 12 %}
+                {% if actualite.image is not null %}
+                    {% set actCol = 9 %}
+                    <div class="col-3">
+                        <img src="/upload/img/{{ actualite.image }}" class="img-fluid" alt="{{ actualite.alt }}">
+                    </div>
+                {% endif %}
+                <div class="col-{{ actCol }}">
+                    <a href="/actualite/id/{{ actualite.id }}/{{ actualite.slug }}">
+                        <h5>{{ actualite.title }}</h5>
+                    </a>
+                    <span class="text-muted">
+                        <i class="fa fa-calendar-day"></i>
+                        {% if actualite.eventDate is not null %}
+                            {{ actualite.eventDate|date('d/m/Y') }}
+                        {% else %}
+                            {{ actualite.createdAt|date('d/m/Y') }}
+                        {% endif %}
+                    </span>
+                    <p>
+                        {{ actualite.chapo|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock main_content %}

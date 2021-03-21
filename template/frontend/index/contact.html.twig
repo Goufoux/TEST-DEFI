@@ -1,0 +1,317 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block meta_description %}
+    <meta description="LCI CONTACT">
+{% endblock meta_description %}
+
+{% block head_block %}
+<blockquote class="h1 col-lg-8 col-12 mx-auto text-white main-title">
+    <div class="row py-2">
+        <div class="col-10 col-12 text-center text-lg-left offset-lg-2">
+            L'Art et la Matière ®
+        </div>
+        <div class="h2 col-10 col-12 second-main-title text-center text-lg-left offset-lg-2">
+            Page de contact
+        </div>
+    </div>
+</blockquote>
+{% endblock head_block %}
+
+{% block main_content %}
+<div class="row">
+    <section class="col-12 mt-3">
+        <div class="row">
+            <h3 class="h3 text-g-blue col-12">
+                Questions & Besoins :
+            </h3>
+            <p class="col-12 text-muted">
+                Contactez-nous via ce formulaire et nous vous répondrons très rapidement. 
+            </p>
+            <form action="#" method="POST" class="col-12 mx-auto py-2 form-contact" 
+            autocomplete="off" {% if request.data('type') == 'devis' %}
+                enctype="multipart/form-data"
+            {% endif %}>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-12 form-contact-col form-contact-right">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-6 mx-auto input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                    <input type="radio" required name="gender" id="gender-1" value="1" {% if request.post('gender') == 1 %}
+                                                        checked
+                                                    {% endif %}>
+                                                    </div>
+                                                </div>
+                                                <label for="gender-1" class="form-text form-block-label form-control">Madame</label>
+                                            </div>
+                                            <div class="mx-auto col-lg-6 col-md-6 col-sm-6 col-6 input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <div class="input-group-text">
+                                                    <input type="radio" required name="gender" id="gender-2" value="2" {% if request.post('gender') == 2 %}
+                                                        checked
+                                                    {% endif %}>
+                                                    </div>
+                                                </div>
+                                                <label for="gender-2" class="form-block-label form-control">Monsieur</label>
+                                            </div>
+                                        </div>
+                                        {% if form.errors('gender') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('gender') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="name" class="input-group-text">Nom</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" data-form="title" maxlength="35" data-help="nameHelp" data-min="3" data-max="35" id="name" name="name" required
+                                        {% if request.post('name') %}
+                                            value="{{ request.post('name') }}"
+                                        {% endif %}>
+                                        <span id="nameHelp" class="form-text text-muted">
+                                            Votre nom doit être compris entre 3 et 35 caractères.
+                                        </span>
+                                        {% if form.errors('name') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="first_name" class="input-group-text">Prénom</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" required data-form="title" maxlength="35" data-help="firstnameHelp" data-min="3" data-max="35" name="first_name" id="first_name"
+                                        {% if request.post('first_name') %}
+                                            value="{{ request.post('first_name') }}"
+                                        {% endif %}>
+                                        <span id="firstnameHelp" class="form-text text-muted">
+                                            Votre prénom doit être compris entre 3 et 35 caractères.
+                                        </span>
+                                        {% if form.errors('first_name') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('first_name') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="phone" class="input-group-text">Téléphone</label>
+                                        </div>
+                                        <input type="tel" class="form-control form-count" required data-form="title" maxlength="15" data-help="phoneHelp" data-min="10" data-max="15" name="phone" id="phone"
+                                        {% if request.post('phone') %}
+                                            value="{{ request.post('phone') }}"
+                                        {% endif %}>
+                                        <span id="phoneHelp" class="form-text text-muted">
+                                            Le téléphone est compris entre 10 et 15 caractères.
+                                        </span>
+                                        {% if form.errors('phone') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('phone') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="email" class="input-group-text">Email</label>
+                                        </div>
+                                        <input type="email" class="form-control form-count" required data-form="title" maxlength="100" data-help="emailHelp" data-min="6" data-max="100" name="email" id="email"
+                                        {% if request.post('email') %}
+                                            value="{{ request.post('email') }}"
+                                        {% endif %}>
+                                        <span id="emailHelp" class="form-text text-muted">
+                                            L'adresse email doit être valide, est comprise entre 6 et 100 caractères.
+                                        </span>
+                                        {% if form.errors('email') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('email') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12">
+                                <div class="row">
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="company" class="input-group-text">Société</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" required data-form="title" maxlength="75" data-help="companyHelp" data-min="3" data-max="75" name="company" id="company" 
+                                        {% if request.post('company') %}
+                                            value="{{ request.post('company') }}"
+                                        {% endif %}>
+                                        <span id="companyHelp" class="form-text text-muted">
+                                            Le nom de votre société doit être compris entre 3 et 75 caractères.
+                                        </span>
+                                        {% if form.errors('company') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('company') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="address" class="input-group-text">Adresse</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" required data-form="title" maxlength="100" data-help="addressHelp" data-min="3" data-max="100" name="address" id="address"
+                                        {% if request.post('address') %}
+                                            value="{{ request.post('address') }}"
+                                        {% endif %}>
+                                        <span id="addressHelp" class="form-text text-muted">
+                                            Votre adresse doit être comprise entre 3 et 100 caractères.
+                                        </span>
+                                        {% if form.errors('address') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('address') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="code_postal" class="input-group-text">Code Postal</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" required data-form="title" maxlength="5" data-help="cpHelp" data-min="3" data-max="10" name="code_postal" id="code_postal"
+                                        {% if request.post('code_postal') %}
+                                            value="{{ request.post('code_postal') }}"
+                                        {% endif %}>
+                                        <span id="cpHelp" class="form-text text-muted">
+                                            Le code postal est compris entre 3 et 10 caractères.
+                                        </span>
+                                        {% if form.errors('code_postal') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('code_postal') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="city" class="input-group-text">Ville</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" required data-form="title" maxlength="75" data-help="cityHelp" data-min="3" data-max="75" name="city" id="city"
+                                        {% if request.post('city') %}
+                                            value="{{ request.post('city') }}"
+                                        {% endif %}>
+                                        <span id="cityHelp" class="form-text text-muted">
+                                            La ville est comprise entre 3 et 75 caractères.
+                                        </span>
+                                        {% if form.errors('city') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('city') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="input-group col-lg-12 col-md-6 col-12 mb-3">
+                                        <div class="input-group-prepend">
+                                            <label for="country" class="input-group-text">Pays</label>
+                                        </div>
+                                        <input type="text" class="form-control form-count" required data-form="title" maxlength="75" data-help="countryHelp" data-min="3" data-max="75" name="country" id="country"
+                                        {% if request.post('country') %}
+                                            value="{{ request.post('country') }}"
+                                        {% endif %}>
+                                        <span id="countryHelp" class="form-text text-muted">
+                                            Le pays est compris entre 3 et 75 caractères.
+                                        </span>
+                                        {% if form.errors('country') %}
+                                            <div class="form-errors">
+                                                <span class="badge badge-danger">{{ form.errors('country') }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 col-12">
+                                <label for="provenance" class="input-group-text rounded-0">Comment avez-vous connu notre site internet ?</label>
+                                <select name="provenance" required id="provenance" class="form-control rounded-0">
+                                    {% if request.post('provenance') %}
+                                        {% set selected = '' %}
+                                    {% else %}
+                                        {% set selected = 'selected' %}
+                                    {% endif %}
+                                    <option value="" disabled {{ selected }}>Sélectionnez une valeur</option>
+                                    {% if request.post('provenance') == 1 %}
+                                        {% set selected = 'selected' %}
+                                    {% else %}
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="1" {{ selected }}>A l'aide d'un moteur de recherche</option>
+                                    {% if request.post('provenance') == 2 %}
+                                        {% set selected = 'selected' %}
+                                    {% else %}
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="2" {{ selected }}>Pages jaunes (papier ou internet)</option>
+                                    {% if request.post('provenance') == 3 %}
+                                        {% set selected = 'selected' %}
+                                    {% else %}
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="3" {{ selected }}>Plaquette publicitaire</option>
+                                    {% if request.post('provenance') == 4 %}
+                                        {% set selected = 'selected' %}
+                                    {% else %}
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="4" {{ selected }}>Salon</option>
+                                    {% if request.post('provenance') == 5 %}
+                                        {% set selected = 'selected' %}
+                                    {% else %}
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="5" {{ selected }}>Autre</option>
+                                </select>
+                                {% if form.errors('provenance') %}
+                                    <div class="form-errors">
+                                        <span class="badge badge-danger">{{ form.errors('provenance') }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if request.data('type') == 'devis' %}
+                        {% include "frontend/index/_devis.html.twig" %}
+                    {% else %}
+                    <div class="form-group mb-3 col-12">
+                        <label for="content" class="input-group-text rounded-0">Message</label>
+                        <textarea name="content" id="content" required placeholder="Votre message" cols="30" rows="10" class="form-control rounded-0 form-count" data-form="title" maxlength="500" data-help="messageHelp" data-min="15" data-max="500">{{ request.post('content')|default('') }}</textarea>
+                        <span id="messageHelp" class="form-text text-muted">
+                            Votre message doit être compris entre 15 et 500 caractères.
+                        </span>
+                        {% if form.errors('content') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('content') }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    <div class="col-12 text-right form-group">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-check-circle"></i>
+                            Envoyer votre demande
+                        </button>
+                    </div>
+            </form>
+            <div class="col-12 mx-auto my-3">
+                <p class="font-weight-bold text-muted">
+                    <i class="fa fa-info-circle"></i>
+                    En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées dans le cadre de cette demande de renseignements et de la relation commerciale qui peut en découler.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="col-12 mb-5">
+        <div class="row">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d21101.33897270367!2d6.178314!3d48.61621!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47949f3fa919dedd%3A0xe1bb6fdb10bd2e42!2s262%20Rue%20Berthollet%2C%2054710%20Ludres%2C%20France!5e0!3m2!1sfr!2sus!4v1566732112527!5m2!1sfr!2sus" class="col-12" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+    </section>
+</div>
+{% endblock main_content %}
+
+{% block javascripts %}
+    <script src="/assets/js/form.js"></script>
+{% endblock javascripts %}

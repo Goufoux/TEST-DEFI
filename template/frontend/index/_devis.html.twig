@@ -1,0 +1,277 @@
+<input type="hidden" name="devis_form" value="1">
+<div class="col-xl-8 col-lg-7 col-12">
+    <div class="row">
+        <div class="input-group mb-3 col-xl-6 col-lg-6 col-md-6 col-12">
+            <div class="input-group-prepend">
+                <label for="dim_longueur" class="input-group-text">Longueur (A)</label>
+            </div>
+            <input type="text" name="dim_longueur" placeholder="mm" id="dim_longueur" class="form-control"
+            {% if request.post('dim_longueur') %}
+                value="{{ request.post('dim_longueur') }}"
+            {% endif %}>
+            {% if form.errors('dim_longueur') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('dim_longueur') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 col-xl-6 col-lg-6 col-md-6 col-12">
+            <div class="input-group-prepend">
+                <label for="dim_largeur" class="input-group-text">Largeur (B)</label>
+            </div>
+            <input type="text" name="dim_largeur" placeholder="mm" id="dim_largeur" class="form-control"
+            {% if request.post('dim_largeur') %}
+                value="{{ request.post('dim_largeur') }}"
+            {% endif %}>
+            {% if form.errors('dim_largeur') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('dim_largeur') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3 col-xl-6 col-lg-6 col-md-6 col-12">
+            <div class="input-group-prepend">
+                <label for="dim_hauteur" class="input-group-text">Hauteur (H)</label>
+            </div>
+            <input type="text" name="dim_hauteur" placeholder="mm" id="dim_hauteur" class="form-control"
+            {% if request.post('dim_hauteur') %}
+                value="{{ request.post('dim_hauteur') }}"
+            {% endif %}>
+            {% if form.errors('dim_hauteur') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('dim_hauteur') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="input-group col-xl-6 col-lg-6 col-md-6  col-12 mb-3">
+            <div class="input-group-prepend">
+                <label for="product_weight" class="input-group-text">Poids du produit</label>
+            </div>
+            <input type="text" name="product_weight" placeholder="(grs)" id="product_weight" class="form-control"
+            {% if request.post('product_weight') %}
+                value="{{ request.post('product_weight') }}"
+            {% endif %}>
+            {% if form.errors('product_weight') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('product_weight') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <label for="type_emballage" class="input-group-text">Type d'emballage</label>
+                    </div>
+                    <select name="type_emballage" id="type_emballage" class="form-control">
+                        {% if request.post('type_emballage') %}
+                            {% set selected = '' %}
+                        {% else %}
+                            {% set selected = 'selected' %}
+                        {% endif %}
+                        <option value="" disabled {{ selected }}>Choisir le type d'emballage</option>
+                        {% if request.post('type_emballage') == 1 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="1" {{ selected }}>Boîte</option>
+                        {% if request.post('type_emballage') == 2 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="2" {{ selected }}>Étui</option>
+                        {% if request.post('type_emballage') == 3 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="3" {{ selected }}>Fond et couvercle</option>
+                        {% if request.post('type_emballage') == 4 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="4" {{ selected }}>Tiroir et fourreau</option>
+                        {% if request.post('type_emballage') == 5 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="5" {{ selected }}>Barquette</option>
+                        {% if request.post('type_emballage') == 6 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="6" {{ selected }}>Pochette</option>
+                        {% if request.post('type_emballage') == 7 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="7" {{ selected }}>Valisette</option>
+                        {% if request.post('type_emballage') == 8 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="8" {{ selected }}>Boîte présentoir</option>
+                        {% if request.post('type_emballage') == 9 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="9" {{ selected }}>PLV</option>
+                        {% if request.post('type_emballage') == 10 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="10" {{ selected }}>Calage</option>
+                        {% if request.post('type_emballage') == 11 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="11" {{ selected }}>Plaque</option>
+                        {% if request.post('type_emballage') == 12 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="12" {{ selected }}>Autre (à préciser)</option>
+                        {% if request.post('type_emballage') == 13 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="13" {{ selected }}>Je ne sais pas</option>
+                    </select>
+                    {% if form.errors('type_emballage') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('type_emballage') }}</span>
+                        </div>
+                    {% endif %}
+                </div>  
+                <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <label for="finition" class="input-group-text">Finition</label>
+                    </div>
+                    <select name="finition" id="finition" class="form-control">
+                        {% if request.post('finition') %}
+                            {% set selected = '' %}
+                        {% else %}
+                            {% set selected = 'selected' %}
+                        {% endif %}
+                        <option value="" disabled {{ selected }}>Choisir le type de finition</option>
+                        {% if request.post('finition') == 1 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="1" {{ selected }}>Sans impression (Neutre)</option>
+                        {% if request.post('finition') == 2 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="2" {{ selected }}>Impression quadri (le plus courant)</option>
+                        {% if request.post('finition') == 3 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="3" {{ selected }}>Impression 2 couleurs</option>
+                        {% if request.post('finition') == 4 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="4" {{ selected }}>Impression 1 couleur</option>
+                        {% if request.post('finition') == 5 %}
+                            {% set selected = 'selected' %}
+                        {% else %}
+                            {% set selected = '' %}
+                        {% endif %}
+                        <option value="5" {{ selected }}>Autre (à préciser)</option>
+                    </select>
+                    {% if form.errors('finition') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('finition') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group mb-3 col-xl-6 col-lg-6 col-md-6  col-12">
+                    <div class="input-group-prepend">
+                        <label for="quantity" class="input-group-text">
+                            Quantité
+                            <span class="size-12 ml-1">
+                                / livraison
+                            </span> 
+                        </label>
+                    </div>
+                    <input type="text" name="quantity" placeholder="0" id="quantity" class="form-control"
+                    {% if request.post('quantity') %}
+                        value="{{ request.post('quantity') }}"
+                    {% endif %}>
+                    {% if form.errors('quantity') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('quantity') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="input-group mb-3 col-xl-6 col-lg-6 col-md-6 col-12">
+                    <div class="input-group-prepend">
+                        <label for="annual_need" class="input-group-text">Besoin annuel</label>
+                    </div>
+                    <input type="text" name="annual_need" placeholder="0" id="annual_need" class="form-control"
+                    {% if request.post('annual_need') %}
+                        value="{{ request.post('annual_need') }}"
+                    {% endif %}>
+                    {% if form.errors('annual_need') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('annual_need') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xl-4 col-lg-5 col-12">
+    <div class="row">
+        <div class="col-12 form-group mb-2">
+            <label for="content" class="input-group-text rounded-0">Description et usages</label>
+            <textarea name="content" data-form="title" placeholder="Decrivez votre besoin et ses usages..." 
+            data-help="contentDHelp" 
+            data-min="15" 
+            data-max="500" 
+            id="content" cols="30" rows="10" class="form-control form-count rounded-0">{{ request.post('content')|default('') }}</textarea>
+            <span id="contentDHelp" class="form-text text-muted">
+                Doit être compris entre 15 et 500 caractères.
+            </span>
+            {% if form.errors('content') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('content') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group mb-2 col-12">
+            <div class="row">
+                <span class="col-12">Joindre un document</span>
+                <span class="text-muted col-12 size-12">Formats acceptés : png, pdf, jpeg, gif, docx, doc</span>
+            </div>
+            <div class="custom-file mt-1">
+                <label class="custom-file-label" for="file">Aucun fichier sélectionné</label>
+                <input type="file" name="file" id="file" class="hide custom-input-file">
+            </div>
+            {% if form.errors('path') is not empty %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('path') }}</span>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

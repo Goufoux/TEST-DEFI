@@ -1,0 +1,221 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="h3 col-lg-8 col-md-10 col-sm-12 mx-auto mt-3 mb-1">
+    <i class="fas fa-plus-circle"></i>
+    Nouveau produit
+</h1>
+<div class="col-12 mx-auto">
+    <form action="#" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="col-lg-8 col-md-10 col-12 mx-auto mb-5">
+                <div class="form-row">
+                    <div class="input-group mb-3 mt-4 col-12">
+                        <div class="input-group-prepend">
+                            <label for="name" class="input-group-text">Nom</label>
+                        </div>
+                        <input type="text" name="name" data-form="title" data-help="titleHelp" data-min="3" data-max="80" id="name" placeholder="Nom du produit" required class="form-control form-count"
+                        {% if request.post('name') %}
+                            value="{{ request.post('name') }}"
+                        {% endif %}>
+                        <span id="titleHelp" class="form-text text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            Le nom doit être compris entre 3 et 80 caractères.
+                        </span>
+                        {% if form.errors('name') %}
+                            <div class="form-errors">
+                                <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 bg-g-dark py-2 mb-3 text-white">
+                        <div class="row">
+                            <h2 class="h5 col-12">
+                                <i class="fas fa-search"></i>
+                                Référencement
+                            </h2>
+                            <div class="input-group mb-3 col-12">
+                                <div class="input-group-prepend">
+                                    <label for="meta_title" class="input-group-text">Méta Titre</label>
+                                </div>
+                                <input type="text" data-form="title" data-help="metatitleHelp" data-min="3" data-max="80" name="meta_title" id="meta_title" required placeholder="Titre utilisé pour le référencement" class="form-control form-count"
+                                {% if request.post('meta_title') %}
+                                    value="{{ request.post('meta_title') }}"
+                                {% endif %}>
+                                <span id="metatitleHelp" class="form-text text-muted">
+                                    <i class="fas fa-info-circle"></i>
+                                    Le meta titre doit être compris entre 3 et 80 caractères.
+                                </span>
+                                {% if form.errors('meta_title') %}
+                                    <div class="form-errors">
+                                        <span class="badge badge-danger">{{ form.errors('meta_title') }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="form-group col-12">
+                                {% if request.post('meta_description') %}
+                                    {% set textarea = request.post('meta_description') %}
+                                {% else %}
+                                    {% set textarea = '' %}
+                                {% endif %}
+                                <label for="meta_description">Méta description</label>
+                                <textarea name="meta_description" id="meta_description" required cols="30" rows="3" class="form-control form-count" data-help="metadescHelp" data-form="meta-desc" data-min="10" data-max="165" placeholder="Description utilisé pour le référencement">{{ textarea }}</textarea>
+                                <span id="metadescHelp" class="form-text text-muted">
+                                    <i class="fas fa-info-circle"></i>
+                                    La meta description doit être comprise entre 10 et 165 caractères.
+                                </span>
+                                {% if form.errors('meta_description') %}
+                                    <div class="form-errors">
+                                        <span class="badge badge-danger">{{ form.errors('meta_description') }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% if rubriques is empty %}
+                        <div class="form-group col-12 mt-3">
+                            <span class="badge badge-danger p-2">Aucune rubrique</span>
+                            <a href="/admin/rubrique/new" class="btn btn-success btn-sm">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <label for="Rubriques" class="input-group-text">Rubriques</label>
+                            </div>
+                            <select name="rubriques[]" id="rubriques" class="form-control select2" multiple>
+                                <optgroup label="Marché">
+                                {% for rubrique in rubriques if rubrique.type == 1 %}
+                                {% if rubrique.id in request.post('rubriques') %}
+                                    {% set selected = 'selected' %}
+                                {% else %} 
+                                    {% set selected = '' %}
+                                {% endif %}
+                                    <option value="{{ rubrique.id }}" {{ selected }}>{{ rubrique.name }}</option>
+                                {% endfor %}
+                                </optgroup>
+                                <optgroup label="Produit">
+                                {% for rubrique in rubriques if rubrique.type == 2 %}
+                                {% if rubrique.id in request.post('rubriques') %}
+                                    {% set selected = 'selected' %}
+                                {% else %} 
+                                    {% set selected = '' %}
+                                {% endif %}
+                                    <option value="{{ rubrique.id }}" {{ selected }}>{{ rubrique.name }}</option>
+                                {% endfor %}
+                                </optgroup>
+                                <optgroup label="Spécialité">
+                                {% for rubrique in rubriques if rubrique.type == 3 %}
+                                    {% if product.rubrique(rubrique.id) == true or rubrique.id in request.post('rubriques') %}
+                                        {% set selected = 'selected' %}
+                                    {% else %} 
+                                        {% set selected = '' %}
+                                    {% endif %}
+                                    <option value="{{ rubrique.id }}" {{ selected }}>{{ rubrique.name }}</option>
+                                {% endfor %}
+                                </optgroup>
+                            </select>
+                        </div>
+                    {% endif %}
+                    {% if request.post('chapo') %}
+                        {% set textarea = request.post('chapo', false) %}
+                    {% else %}
+                        {% set textarea = '' %}
+                    {% endif %}
+                    <div class="form-group col-12">
+                        <label for="description">Chapô</label>
+                        <textarea name="chapo" id="chapo" data-form="chapo" data-help="chapoHelp" data-min="0" data-max="35" cols="10" rows="2" placeholder="Texte pour la page d'accueil" class="form-control form-count">{{ textarea }}</textarea>
+                        <span id="chapoHelp" class="form-text form-muted">
+                            <i class="fas fa-info-circle"></i>
+                            Le chapô n'est pas obligatoire, longeur maximum de 35 caractères.
+                        </span>
+                        {% if form.errors('chapo') %}
+                            <div class="form-errors">
+                                <span class="badge badge-danger">{{ form.errors('chapo') }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if request.post('content') %}
+                        {% set textarea = request.post('content', false) %}
+                    {% else %}
+                        {% set textarea = '' %}
+                    {% endif %}
+                    <div class="form-group col-12">
+                        <label for="description">Contenu</label>
+                        <textarea name="content" id="my-selector" cols="30" rows="15" placeholder="Contenu..." class="form-control">{{ textarea }}</textarea>
+                        {% if form.errors('content') %}
+                            <div class="form-errors">
+                                <span class="badge badge-danger">{{ form.errors('content') }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-10 col-12 mx-auto bg-g-dark text-white mb-2 mt-2 py-2">
+            <div class="form-row">
+                <h2 class="h5 col-12">
+                    <i class="fas fa-images"></i>
+                    Images liées au produit
+                </h2>
+                <div class="col-lg-6 col-12 product-right-col">
+                    <div class="row">
+                        <h3 class="h5 col-12">Image mise en avant</h3>
+                        <div class="form-group mb-3 col-lg-6 col-12">
+                            <div class="custom-file">
+                                <label class="custom-file-label" for="image">Aucun fichier sélectionné</label>
+                                <input type="file" name="image" id="image" class="hide custom-input-file">
+                            </div>
+                            {% if form.errors('image') is not empty %}
+                                <div class="form-errors">
+                                    <span class="badge badge-danger">{{ form.errors('image') }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="input-group mb-3 col-lg-6 col-12">
+                            <div class="input-group-prepend">
+                                <label for="alt" class="input-group-text">Balise alt</label>
+                            </div>
+                            <input type="text" name="alt" maxlength="75" id="alt" placeholder="Nom de l'image" class="form-control" required
+                            {% if request.post('alt') %}
+                                value="{{ request.post('alt') }}"
+                            {% else %}
+                                value="{{ product.alt }}"
+                            {% endif %}
+                            >
+                            {% if form.errors('alt') is not empty %}
+                                <div class="form-errors">
+                                    <span class="badge badge-danger">{{ form.errors('alt') }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="preview-parent col-6"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 product-left-col">
+                    <div class="row">
+                        <h3 class="h5 col-12">Galleries</h3>
+                        <div class="col-12 form-row-galleries"></div>
+                        <div class="col-12">
+                            <button id="addProductImage" class="btn btn-outline-info">
+                                <i class="fas fa-plus"></i>
+                                Ajouter une image
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-lg-8 col-md-10 col-12 mx-auto mb-3 text-right">
+            <input type="submit" value="Ajouter" class="btn btn-success">
+        </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}
+
+{% block javascripts %}
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/assets/js/tinymce.js"></script>
+<script src="/assets/js/form.js"></script>
+{% endblock javascripts %}

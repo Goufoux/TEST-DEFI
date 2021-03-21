@@ -1,0 +1,88 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block meta_description %}
+    <meta description="{{ product.metaDescription }}">
+{% endblock meta_description %}
+
+{% block head_block %}
+<blockquote class="h1 col-lg-8 col-12 mx-auto text-white main-title">
+    <div class="row py-2">
+        <div class="col-10 col-12 text-center text-lg-left offset-lg-2">
+            L'Art et la Matière ®
+        </div>
+        {% if product.filters is not empty %}
+            <div class="brand-filters col-10 col-12 text-center text-lg-left offset-lg-2">
+                {% for key, pFiltre in product.filters %}
+                    {% if key < (product.filters|length-1) %}    
+                    <span>{{ pFiltre.filter.name }} -</span>
+                    {% else %}
+                    <span>{{ pFiltre.filter.name }}</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</blockquote>
+{% endblock head_block %}
+
+{% block main_content %}
+<section class="col-lg-11 col-12 mb-5 mx-auto mt-2 content-view" id="product-section" data-product="{{ product.id }}">
+    <div class="ariane-bloc">
+        {% set cat = 'Produit' %}
+        {% set name = '' %}
+        {% if product.rubriques is not empty %}
+            {% for pFilter in product.rubriques %}
+                {% if pFilter.rubrique.type == 2 %}
+                    {% set name = pFilter.rubrique.name %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <a href="#" class="cat-link">{{ cat }}</a><span> / {{ name }}</span>
+    </div>
+    <div class="row">
+    <div class="disable-button"></div>
+    <div class="detail"></div>
+        <div class="col-12">
+            <div class="row">
+                <h1 class="col-12 h1 product-view-h1 main mb-4">
+                    {{ product.name }}
+                </h1>
+                <div class="col-lg-4 col-12">
+                    <div id="product-galleries"></div>
+                </div>
+                <div class="col-lg-8 col-12">
+                    {{ product.content|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main_content %}
+
+{% block second_content %}
+<div class="col-12 mx-auto mb-5">    
+{% if similarProducts is not empty %}
+    <div class="row bg-similar-product rounded mx-0 p-2 justify-content-center">
+        <h3 class="col-12 h5 text-orange">Produit similaires</h3>
+        {% for key, item in similarProducts if key < 4 %}
+        <div class="col-lg-3 col-md-4 col-sm-5 col-6">
+            <div class="row">
+                <div class="col-12">
+                    <img src="/upload/img/{{ item.product.image }}" class="img-fluid" alt="{{ item.product.alt }}">
+                </div>
+                <a class="col-12 h3 h3-similar break-word" href="/product/{{ item.product.id }}/{{ item.product.slug }}">
+                    {{ item.product.name|raw }}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock second_content %}
+
+
+{% block javascripts %}
+<script src="/assets/drift-master/dist/Drift.js"></script>
+<script src="/assets/js/product.js"></script>
+{% endblock javascripts %}

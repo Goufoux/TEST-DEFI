@@ -1,0 +1,100 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-10 col-md-10 col-sm-12 mx-auto h3 my-3">
+    <i class="fas fa-list"></i>
+    Gestion des produits
+    <div class="float-right">
+        <a href="/admin/product/new" class="btn btn-primary btn-sm">
+            <i class="fas fa-plus-circle"></i>
+            Nouveau produit
+        </a>
+    </div>
+</h1>
+{% if products is empty %}
+    <div class="alert alert-info col-lg-8 col-md-10 col-sm-12 mx-auto">
+        <h2 class="h4 alert-heading">
+            <i class="fas fa-info-circle"></i>
+            Aucun produit.
+        </h2>
+        <p>
+            <a href="/admin/product/new" class="btn btn-success">
+                <i class="fas fa-plus"></i>
+                Ajouter un produit
+            </a>
+        </p>
+    </div>
+{% else %}
+<div class="col-lg-10 col-md-10 col-sm-12 mx-auto">
+    <div class="row">
+        <p class="col-12">
+            <span class="badge badge-primary">Filtre marché</span>
+            <span class="badge badge-secondary">Filtre produit</span>
+            <span class="badge badge-info">Filtre par spécialité</span>
+        </p>
+    </div>
+    <div class="row search-row mb-1">
+        <div class="input-group col-12">
+            <div class="input-group-prepend">
+                <label for="search_product" class="input-group-text">
+                    <i class="fa fa-search"></i>
+                </label>
+            </div>
+            <input type="text" name="search_product" id="search_product" class="form-control" placeholder="Rechercher un produit">
+        </div>
+    </div>
+    <div id="search-result"><div class="row m-0"></div></div>
+    <div class="pagination py-2">
+        {% if nb is not null %}
+            {% set nbPage = (nb / limit)|round %}
+            {% if request.data('page') > 1 %}
+            <a href="/admin/product" class="mx-2 badge badge-primary rounded-circle">1</a>            
+            {% endif %}
+            {% for i in 1 .. nbPage if i != 1 %}
+                <a href="/admin/product?page={{ i }}" class="mx-2 badge badge-primary rounded-circle">{{ i }}</a>            
+            {% endfor %}
+        {% endif %}
+    </div>
+    <table class="table table-dark table-striped back-product-table rounded text-white">
+        <thead>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Rubriques</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td class="img-bloc">
+                    <img src="/upload/img/{{ product.image }}" alt="{{ product.alt }}" class="img-fluid">
+                </td>
+                <td>{{ product.name }}</td>
+                <td>
+                    {% for item in product.rubriques %}
+                        {% if item.rubrique.type == 1 %}
+                            <span class="badge badge-primary">{{ item.rubrique.name }}</span>
+                        {% elseif item.rubrique.type == 2 %}
+                            <span class="badge badge-secondary">{{ item.rubrique.name }}</span>
+                        {% else %}
+                            <span class="badge badge-info">{{ item.rubrique.name }}</span>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="/product/{{ product.id }}/{{ product.slug }}">
+                        <i class="fas fa-eye mx-1 text-white"></i>
+                    </a>
+                    <a href="/admin/product/update/{{ product.id }}">
+                        <i class="fas fa-pen mx-1 text-white"></i>
+                    </a>
+                    <a href="/admin/product/remove/{{ product.id }}">
+                        <i class="fas fa-trash mx-1 text-white ico ico-danger"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+{% endblock body %}

@@ -1,0 +1,39 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-8 col-md-10 col-sm-12 mx-auto h2 my-3">
+    <i class="fas fa-list"></i>
+    Liste des dernières connexions
+    <div class="float-right">
+        <a class="btn btn-danger" href="/admin/connexion/truncate">
+            Vider
+        </a>
+    </div>
+</h1>
+<div class="col-lg-8 col-md-10 col-12 mx-auto mt-3">
+    {% if connexions is empty %}
+    <div class="alert alert-info">
+        <h2 class="h5 alert-heading">
+            Aucun connexion récente.
+        </h2>
+    </div>
+    {% else %}
+    <table class="table table-striped table-dark">
+        <thead>
+            <th>#</th>
+            <th>Date</th>
+            <th>Utilisateur</th>
+        </thead>
+        <tbody>
+            {% for connexion in connexions %}
+                <tr>
+                    <td>{{ connexion.id }}</td>
+                    <td>{{ connexion.createdAt|date('d/m/y à H:i') }}</td>
+                    <td>{{ connexion.user.firstName }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock body %}

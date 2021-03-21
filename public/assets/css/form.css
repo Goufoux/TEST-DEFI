@@ -1,0 +1,30 @@
+.form-control .is-valid {
+    border-bottom: 2px green solid !important;
+}
+span.form-text {
+    display: none;
+    width: 100%;
+    overflow: hidden;
+}
+.input-group-prepend {
+    height: auto;
+}
+.form-control {
+    height: initial;
+}
+.input-group {
+    height: auto !important;
+}
+.input-group-text {
+    white-space: inherit;
+}
+.img-wrapper {
+    position: absolute;
+}
+.img-wrapper .badge {
+    position: relative;
+}
+
+.badge-draggable {
+    z-index: 99999;
+}

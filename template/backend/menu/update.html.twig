@@ -1,0 +1,114 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-12 h2">
+    <i class="fas fa-pen"></i>
+    Mise à jour : {{ menu.name }}
+</h1>
+    <form class="col-12 my-2 col-lg-6 col-md-12 mx-auto" action="#" method="post">
+        <div class="form-row">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="name" class="input-group-text">Nom</label>
+                </div>
+                <input type="text" name="name" id="name" class="form-control" required
+                {% if request.post('name') %}
+                    value="{{ request.post('name') }}"
+                {% else %}
+                    value="{{ menu.name }}"
+                {% endif %}
+                >
+                {% if form.errors('name') is not empty %}
+                    <div class="form-errors">
+                        <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="name" class="input-group-text">
+                        {% if menu.menuGroup.id is not null %}
+                        <a href="/admin/menu/remove/group/{{ menu.id }}" class="text-danger mr-2">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {% endif %}
+                        Groupe
+                    </label>
+                </div>
+                <select name="menu_group" id="menu_group" class="form-control">
+                    {% if menu.menuGroup.id is null or request.post('menu_group') == null %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                    <option value="" {{ selected }} disabled>Attribuer un groupe</option>
+                    {% for group in menuGroups %}
+                    {% if (menu.menuGroup.id == group.id and request.post('menu_group') == null) or request.post('menu_group') == group.id  %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                        <option value="{{ group.id }}" {{ selected }}>{{ group.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="contenu" class="input-group-text">
+                        {% if menu.contenu is not null %}
+                        <a href="/admin/menu/remove/contenu/{{ menu.id }}" class="text-danger mr-2">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        {% endif %}
+                        Contenu à lier
+                    </label>
+                </div>
+                <select name="contenu" id="contenu" class="form-control">
+                    {% if request.post('contenu') and menu.contenu.id is null %}
+                        {% set selected = '' %}
+                    {% else %}
+                        {% set selected = 'selected' %}
+                    {% endif %}
+                    <option value="" {{ selected }} disabled>Attribuer un contenu</option>
+                    {% for contenu in contenus %}
+                    {% if (request.post('contenu') == null and menu.contenu == contenu.id) or request.post('contenu') == contenu.id %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                    <option value="{{ contenu.id }}" {{ selected }}>{{ contenu.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="link" class="input-group-text">Lien</label>
+                </div>
+                <input type="text" name="link" placeholder="Lien absolu" id="link" class="form-control"
+                {% if request.post('link') %}
+                    value="{{ request.post('link') }}"
+                {% else %}
+                    value="{{ menu.link }}"
+                {% endif %}
+                >
+                {% if form.errors('link') is not empty %}
+                    <div class="form-errors">
+                        <span class="badge badge-danger">{{ form.errors('link') }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <input type="checkbox" name="navbar_brand" data-toggle="toggle" data-on="Principal" data-off="Défaut" data-onstyle="success" data-offstyle="primary"{% if menu.navbarBrand == 1 or request.post('navbar_brand') %}
+                        checked
+                    {% endif %}>
+                    </div>
+                    <div class="form-group col-6 text-right">
+                        <input type="submit" value="Mettre à jour" class="btn btn-info">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock body %}

@@ -1,0 +1,55 @@
+<div class="filter-bloc col-12">
+    <div class="row">
+        <h3 class="h4 font-normal font-italic text-g-gray-3 small-caps spacing-2 pt-2 col-12">
+            <i class="fas fa-caret-right"></i>
+            Filtre par marché
+        </h3>
+        {% if rubriques is empty %}
+            <span class="badge badge-info p-2 d-block w-25 mx-auto">
+                Aucune rubrique
+            </span>
+        {% else %}
+            <div class="list-group col-12">
+                {% for rubrique in rubriques if rubrique.type == 1 %}
+                    <a class="list-group-item list-group-item-action" href="/rubrique/{{ rubrique.slug }}">
+                        {{ rubrique.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <h3 class="h4 font-normal font-italic text-g-gray-3 small-caps spacing-2 mt-2 pt-2 col-12">
+            <i class="fas fa-caret-right"></i>
+            Filtre par produit
+        </h3>
+        {% if rubriques is empty %}
+            <span class="badge badge-info p-2 d-block w-25 mx-auto">
+                Aucune rubrique
+            </span>
+        {% else %}
+            <div class="list-group col-12 mb-2">
+                {% for rubrique in rubriques if rubrique.type == 2 %}
+                    <a class="list-group-item list-group-item-action" href="/rubrique/{{ rubrique.slug }}">
+                        {{ rubrique.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <h3 class="h4 font-normal font-italic text-g-gray-3 small-caps spacing-2 mt-2 pt-2 col-12">
+            <i class="fas fa-caret-right"></i>
+            Filtre par spécialité
+        </h3>
+        {% if rubriques is empty %}
+            <span class="badge badge-info p-2 d-block w-25 mx-auto">
+                Aucune rubrique
+            </span>
+        {% else %}
+            <div class="list-group col-12 mb-2">
+                {% for rubrique in rubriques if rubrique.type == 3 %}
+                    <a class="list-group-item list-group-item-action" href="/rubrique/{{ rubrique.slug }}">
+                        {{ rubrique.name }}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,185 @@
+{% extends "frontend/base.html.twig" %}
+{% import "frontend/macro/macro.produits.html.twig" as _Produit %}
+{% block head_block %}
+<blockquote class="h1 col-lg-8 mt-5 col-12 mx-auto text-white main-title">
+    <div class="row py-2">
+        <div class="col-10 col-12 text-center text-lg-left offset-lg-2">
+            L'Art et la Matière ®
+        </div>
+    </div>
+</blockquote>
+{% endblock head_block %}
+
+{% block main_content %}
+<div class="row">
+    <section class="mt-4 col-lg-11 col-12 mx-auto" id="index">
+        <div class="row h-100">
+            <div class="col-lg-5 col-md-6 mb-md-0 mb-2 bg-g-gray-3 col-12 py-2">
+                <div class="row">
+                    <div class="col-12 text-center pt-2">
+                        <img src="/img/lci-packaging-usine-fabricant-emballage-carton.jpg" class="img-fluid border border-g-blue"
+                        alt="LCI Packaging bâtiment">
+                    </div>
+                    <div class="col-12 pt-2">
+                        <div class="row">
+                            <h1 class="h4 mb-0 col-12 text-g-gray-2 font-weight-bold">Le Cartonnage Industriel</h1>
+                            <h3 class="h3 mt-0 col-12 text-g-blue font-weight-bold">LCI-Packaging</h3>
+                            <ul class="list-group col-12 list-group-transparent">
+                                <li class="list-group-item">
+                                    <i class="fas fa-square text-orange"></i>
+                                    Conception et fabrication d'emballage et de cartonnage pliants
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-square text-orange"></i>
+                                    Transformation du carton compact et microcannelure
+                                </li>
+                                <li class="list-group-item">
+                                    <i class="fas fa-square text-orange"></i>
+                                    Fabrication française
+                                </li>
+                            </ul>
+                            <div class="col-12 text-center py-2">
+                                <a href="/contenu/15/bien-choisir-votre-emballage#video"
+                                target="_blank"
+                                class="btn btn-orange btn-sm">Voir notre atelier <b>en vidéo</b></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6 col-12 h-100">
+                <div class="row justify-content-end h-100">
+                    <div class="col-md-11 col-12 py-2 bg-g-gray-3">
+                        <div class="row">
+                            <h2 class="h5 col-12 text-g-blue font-weight-bold mb-0">
+                                LCI-Packaging fabricant d'emballage carton
+                            </h2>
+                            <div class="col-xl-8 col-lg-6 col-12">
+                                <div class="row">
+                                    <p class="col-12 text-g-gray-2 pt-4">
+                                        Fabricant français qui associe l'<strong>étude</strong> et le <strong>desgin</strong> de l'emballage, le <strong>conditionnement</strong> et la <strong>protection</strong> du produit, <br>
+                                        ainsi que la <strong>réactivité</strong> d'une production de <strong>qualité</strong>.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-6 mx-auto">
+                                <div class="row">
+                                    <div class="col-12 text-center pt-2">
+                                        <img src="/img/emballage-carton-fabrication-france.png" class="img-fluid"
+                                        alt="LCI Packaging bâtiment">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row pt-3">
+                                    <ul class="list-group list-group-transparent col-12">
+                                        <li class="list-group-item">
+                                            <i class="fas fa-square text-orange"></i>
+                                            Un travail dans le respect de la tradition propre à notre métier
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-square text-orange"></i>
+                                            Des équipements performants
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-square text-orange"></i>
+                                            Une structure souple et légère
+                                        </li>
+                                    </ul>
+                                    <ul class="list-group list-group-transparent col-12">
+                                        <li class="list-group-item">
+                                            <i class="fas fa-square text-orange"></i>
+                                            Des locaux modernes et adaptés
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-square text-orange"></i>
+                                            Une logistique facilitée par une situation géographique privilégiée
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fas fa-square text-orange"></i>
+                                            Une fabrication qui respecte l'environnement
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock main_content %}
+{% block second_content %}
+<div class="row">
+    <div class="col-lg-11 col-12 mx-auto">
+        <div class="row">
+            <h2 class="h4 col-12 mb-4 font-weight-bold pl-0 text-g-blue">Nos dernières réalisations</h2>
+            <div class="col-12">
+                <div class="row">
+                    {% if produits is not empty %}
+                        {% set compteur = 0 %}
+                        {% for produit in produits %}
+                        {% set r = compteur / 2 %}
+                        {% if r % 2 == 0 %}
+                            {% set side = 'gauche' %}
+                        {% else %}
+                            {% set side = 'droit' %}
+                        {% endif %}
+                        {{ _Produit.produit(produit, side) }}
+                        {% set compteur = compteur + 1 %}
+                        {% endfor %}
+                    {% endif %}   
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if actualites is not empty %}
+    <div class="col-lg-11 col-12 mx-auto my-5">
+        <div class="row">
+            <h2 class="h4 col-12 mb-3 text-g-blue pl-0 font-weight-bold">Nos dernières actualités</h2>
+            <div id="carousel" class="carousel px-0 col-12 slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row justify-content-space-between">
+                        {% set io = 0 %}
+                        {% for key, actualite in actualites %}
+                            {% set io = io + 1 %}
+                            {% set offset = 'offset-lg-1' %}
+                                {% if key == 0 %}
+                                    {% set offset = 'offset-lg-2' %}
+                                {% endif %}
+                                <div class="col-lg-4 col-md-5 mx-lg-0 mx-auto col-sm-8 col-10 spe bg-white {{ offset }}">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <img src="/upload/img/{{ actualite.image }}" class="mx-auto bloc-actu-image img-fluid" alt="{{ actualite.alt }}">
+                                        </div>
+                                        <div class="col-12 bloc-actu">
+                                            <div class="row">
+                                                <span class="text-muted col-12 mb-2">{{ actualite.eventDate|date('d/m/Y') }}</span>
+                                                <a href="/actualite/id/{{ actualite.id }}/{{ actualite.slug }}" class="col-12">
+                                                    <h5 class="h5 size-15">{{ actualite.title }}</h5>
+                                                </a>
+                                                <div class="col-12 size-12">
+                                                    {{ actualite.chapo|raw }}
+                                                </div>
+                                                <div class="col-12 text-right mb-2">
+                                                    <a href="/actualite/id/{{ actualite.id }}/{{ actualite.slug }}"
+                                                    class="badge badge-orange text-white">
+                                                        Lire <i class="fa fa-plus-circle"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock second_content %}

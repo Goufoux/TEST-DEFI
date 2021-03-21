@@ -1,0 +1,55 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-8 col-md-10 col-sm-12 mx-auto h2 my-3">
+    <i class="fas fa-images"></i>
+    Liste des images sur le serveur
+    <div class="float-right">
+        <a href="/admin/uploader/new" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+        </a>
+    </div>
+</h1>
+{% if images is empty %}
+    <div class="alert alert-info col-6 mx-auto my-3">
+        <h5 class="alert-heading">
+            <i class="fas fa-info-circle"></i>
+            Aucun fichier sur le serveur.
+        </h5>
+        <a href="/admin/uploader/new" class="btn btn-success">
+            <i class="fas fa-plus"></i>
+            Ajouter des images
+        </a>
+    </div>
+{% else %}
+<div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+    <div class="row justify-content-center">
+        {% for image in images %}
+            <div class="col-lg-3 col-md-4 col-12 m-2 card bg-g-dark text-white p-0">
+                <img src="/upload/img/{{ image.path }}" alt="{{ image.alt }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">{{ image.name }}</h5>
+                    <p class="card-text">
+                        <i class="fas fa-link"></i> http://lci.genarkys.fr/upload/img/{{ image.path }}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <a href="/upload/img/{{ image.path }}" class="btn btn-info" target="_blank">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                        <div class="col-6 text-center">
+                            <a href="/admin/uploader/remove/{{ image.id }}" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

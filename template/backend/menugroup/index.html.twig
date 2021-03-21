@@ -1,0 +1,58 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-8 col-md-10 col-sm-12 mx-auto  h2 my-3">
+    <i class="fas fa-list"></i>
+    Gestion des groupes
+    <div class="float-right">
+        <a href="/admin/menu/group/new" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+        </a>
+    </div>
+</h1>
+{% if menuGroups is empty %}
+<div class="alert alert-info col-lg-8 col-md-10 col-sm-12 mx-auto  my-3">
+    <h5 class="alert-heading">
+        <i class="fas fa-info-circle"></i>
+        Aucun groupe.
+    </h5>
+    <a href="/admin/menu/group/new" class="btn btn-info">
+        <i class="fas fa-plus"></i>
+        Ajouter
+    </a>
+</div>
+{% else %}
+<div class="col-lg-8 col-md-10 col-sm-12 mx-auto ">
+    <div class="row justify-content-center">
+        {% for menuGroup in menuGroups %}
+            <div class="card m-2 bg-g-dark">
+                <h2 class="h3 card-header text-white">
+                    {{ menuGroup.name }}
+                </h2>
+                <div class="card-body">
+                    {% if menuGroup.elements is empty %}
+                    <span class="text-white">    
+                        <i class="fas fa-times"></i>
+                        Ce groupe ne contient aucun élément.
+                    </span>
+                    {% else %}
+                        <ul class="list-group">
+                            {% for element in menuGroup.elements %}
+                                <li class="list-group-item">
+                                    Nom : {{ element.name }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    <a href="/admin/menu/group/remove/{{ menuGroup.id }}" class="btn btn-danger">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock body %}

@@ -1,0 +1,160 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="h3 col-lg-8 col-sm-12 my-2 mx-auto">
+    <i class="fas fa-pen"></i>
+    <span class="text-muted">{{ rubrique.name }}</span>
+</h1>
+<div class="col-lg-8 col-sm-10 mx-auto p-2">
+    <form action="#" method="post">
+        <div class="form-row">
+            <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                    <label for="name" class="input-group-text">Nom</label>
+                </div>
+                <input type="text" name="name" data-form="title" data-help="titleHelp" data-min="3" data-max="80" placeholder="Nom de la rubrique" id="name" class="form-control form-count" required
+                {% if request.post('name') %}
+                    value="{{ request.post('name') }}"
+                {% else %}
+                    value="{{ rubrique.name|raw }}"
+                {% endif %}
+                >
+                <span id="titleHelp" class="form-text text-muted">
+                    <i class="fas fa-info-circle"></i>
+                    Le nom doit être compris entre 3 et 80 caractères.
+                </span>
+                {% if form.errors('name') %}
+                    <div class="form-errors">
+                        <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                    <label for="tags" class="input-group-text">Tags</label>
+                </div>
+                <input type="text" name="tags" data-form="title" data-help="tagsHelp" data-min="3" data-max="75" placeholder="Tags" id="tags" class="form-control form-count"
+                {% if request.post('tags') %}
+                    value="{{ request.post('tags') }}"
+                {% else %}
+                    value="{{ rubrique.tags|raw }}"
+                {% endif %}
+                >
+                <span id="tagsHelp" class="form-text text-muted">
+                    <i class="fas fa-info-circle"></i>
+                    Les tags apparaîtront dans le bloc de la rubrique. 75 caractères maxmimum.
+                </span>
+                {% if form.errors('tags') %}
+                    <div class="form-errors">
+                        <span class="badge badge-danger">{{ form.errors('tags') }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="input-group mb-3 col-12">
+                <div class="input-group-prepend">
+                    <label for="type" class="input-group-text">Type de rubrique</label>
+                </div>
+                <select name="type" id="type" class="form-control" required>
+                    {% if request.post('type') or rubrique.type is not null %}
+                        {% set selected = '' %}
+                    {% else %}
+                        {% set selected = 'selected' %}
+                    {% endif %}
+                    <option value="" disabled {{ selected }}>Sélection du type de rubrique</option>
+                    {% if request.post('type') == 1 or rubrique.type == 1 %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                    <option value="1" {{ selected }}>Marché</option>
+                    {% if request.post('type') == 2 or rubrique.type == 2 %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                    <option value="2" {{ selected }}>Produit</option>
+                    {% if request.post('type') == 3 or rubrique.type == 3 %}
+                        {% set selected = 'selected' %}
+                    {% else %}
+                        {% set selected = '' %}
+                    {% endif %}
+                    <option value="3" {{ selected }}>Spécialité</option>
+                </select>
+                {% if form.errors('name') %}
+                    <div class="form-errors">
+                        <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-12 text-white bg-g-dark py-2 rounded mb-3">
+                <div class="row">
+                    <h2 class="h5 col-12">
+                        <i class="fas fa-search"></i>
+                    Référencement
+                    </h2>
+                    <div class="input-group mb-3 col-12">
+                        <div class="input-group-prepend">
+                            <label for="meta_title" class="input-group-text">Méta Titre</label>
+                        </div>
+                        <input type="text" name="meta_title" data-form="title" data-help="metatitleHelp" data-min="3" data-max="80" id="meta_title" required placeholder="Titre utilisé pour le référencement" class="form-control form-count"
+                        {% if request.post('meta_title') %}
+                            value="{{ request.post('meta_title') }}"
+                        {% else %}
+                            value="{{ rubrique.metaTitle|raw }}"
+                        {% endif %}>
+                        <span id="metatitleHelp" class="form-text text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            Le meta titre doit être compris entre 3 et 80 caractères.
+                        </span>
+                        {% if form.errors('meta_title') %}
+                            <div class="form-errors">
+                                <span class="badge badge-danger">{{ form.errors('meta_title') }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-12">
+                        {% if request.post('meta_description') %}
+                            {% set textarea = request.post('meta_description') %}
+                        {% else %}
+                            {% set textarea = rubrique.metaDescription|raw %}
+                        {% endif %}
+                        <label for="meta_description">Méta description</label>
+                        <textarea name="meta_description" data-help="metadescHelp" data-form="meta-desc" data-min="10" data-max="165" id="meta_description" required cols="30" rows="3" class="form-control form-count" placeholder="Description utilisé pour le référencement">{{ textarea }}</textarea>
+                        <span id="metadescHelp" class="form-text text-muted">
+                            <i class="fas fa-info-circle"></i>
+                            La meta description doit être comprise entre 10 et 165 caractères.
+                        </span>
+                        {% if form.errors('meta_description') %}
+                            <div class="form-errors">
+                                <span class="badge badge-danger">{{ form.errors('meta_description') }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3 col-12">
+                <label for="my-selector">Contenu</label>
+                {% if request.post('description') %}
+                    {% set textarea = request.post('description', false) %}
+                {% else %}
+                    {% set textarea = rubrique.description %}
+                {% endif %}
+                <textarea name="description" id="my-selector" cols="10" rows="20" class="form-control" placeholder="Description...">{{ textarea|raw }}</textarea>
+                {% if form.errors('description') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('description') }}</span>
+                </div>
+                {% endif %}
+            </div>
+            <div class="form-group my-3 text-right col-12">
+                <input type="submit" value="Mettre à jour" class="btn btn-info">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}
+{% block javascripts %}
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/assets/js/tinymce.js"></script>
+<script src="/assets/js/form.js"></script>
+{% endblock javascripts %}

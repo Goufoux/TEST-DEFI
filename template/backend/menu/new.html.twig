@@ -1,0 +1,96 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="h2 col-lg-8 col-md-10 col-sm-12 mx-auto my-3">
+    <i class="fas fa-plus"></i>
+    Nouvel élément
+</h1>
+<form class="col-lg-6 col-md-10 col-sm-12 mx-auto" action="#" method="post">
+    <div class="form-row">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="name" class="input-group-text">Nom</label>
+            </div>
+            <input type="text" placeholder="Nom" required name="name" id="name" class="form-control"
+            {% if request.post('name') %}
+                value="{{ request.post('name') }}"
+            {% endif %}
+            >
+            {% if form.errors('name') is not empty %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="menu_group" class="input-group-text">Groupe</label>
+            </div>
+            <select name="menu_group" id="menu_group" class="form-control">
+                {% if request.post('menu_group') %}
+                    {% set selected = '' %}
+                {% else %}
+                    {% set selected = 'selected' %}
+                {% endif %}
+                <option value="" {{ selected }} disabled>Attribuer un groupe</option>
+                {% for group in menuGroups %}
+                {% if request.post('menu_group') and request.post('menu_group') == group.id %}
+                    {% set selected = 'selected' %}
+                {% else %}
+                    {% set selected = '' %}
+                {% endif %}
+                <option value="{{ group.id }}" {{ selected }}>{{ group.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="contenu" class="input-group-text">Contenu à lier</label>
+            </div>
+            <select name="contenu" id="contenu" class="form-control">
+                {% if request.post('contenu') %}
+                    {% set selected = '' %}
+                {% else %}
+                    {% set selected = 'selected' %}
+                {% endif %}
+                <option value="" {{ selected }} disabled>Attribuer un contenu</option>
+                {% for contenu in contenus %}
+                {% if request.post('contenu') and request.post('contenu') == contenu.id %}
+                    {% set selected = 'selected' %}
+                {% else %}
+                    {% set selected = '' %}
+                {% endif %}
+                <option value="{{ contenu.id }}" {{ selected }}>{{ contenu.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="link" class="input-group-text">Lien</label>
+            </div>
+            <input type="text" name="link" placeholder="Lien absolu" id="link" class="form-control"
+            {% if request.post('link') %}
+                value="{{ request.post('link') }}"
+            {% endif %}
+            >
+            {% if form.errors('link') is not empty %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('link') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <input type="checkbox" name="navbar_brand" data-toggle="toggle" data-on="Principal" data-off="Défaut" data-onstyle="success" data-offstyle="primary"{% if request.post('navbar_brand') or request.data('brand') == '1' %}
+                        checked
+                    {% endif %}>
+                </div>
+                <div class="form-group col-6 text-right">
+                    <input type="submit" value="Ajouter" class="btn btn-success">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock body %}

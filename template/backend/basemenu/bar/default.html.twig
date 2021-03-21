@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-g-dark">
+    <div class="navbar-brand navbar-brand-special">
+        <a href="/admin/" class="interface-nav">
+            {{ interface }}
+        </a>/
+        {% if module is defined %}
+            <a href="{{ module_url }}" class="module-nav">
+                {{ module }}
+            </a>/
+        {% endif %}
+        {% if view is defined %}
+            <a href="#" class="view-nav">
+                {{ view }}
+            </a>
+        {% endif %}
+    </div>
+</nav>

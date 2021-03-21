@@ -1,0 +1,13 @@
+#tinymce .row {
+    border: dotted 1px green;
+}
+#tinymce .row .tinymce-col {
+    border: dotted 1px purple;
+}
+button[aria-label="test"] {
+    border: solid red;
+}
+#tinymce #product-galleries {
+    border: solid red;
+    background: grey;
+}

@@ -1,0 +1,40 @@
+{% macro produit(produit, side) %}
+    <div class="col-sm-6 pr-2 mb-2 col-12">
+        <div class="row mr-0 bg-g-gray-3">
+            <div class="bloc-produit col-12">
+                <div class="row">
+                    {% if side == 'gauche' %}
+                        <a class="col-5 p-0" href="/product/{{ produit.id }}/{{ produit.slug }}">
+                            <img src="/upload/img/{{ produit.image }}" alt="{{ produit.alt }}" 
+                            class="img-fluid img-bloc">
+                        </a>
+                        <div class="col-lg-6 offset-lg-1 col-6 text-dark bloc-descriptif bloc-descriptif-{{ produit.id }}">
+                            <div class="row">
+                                <h3 class="h4 col-12">{{ produit.name }}</h3>
+                                <p class="col-12">
+                                    {{ produit.chapo|raw }}
+                                </p>
+                                <a href="/product/{{ produit.id }}/{{ produit.slug }}"
+                                class="col-12">
+                                    Vue fiche descriptive
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col text-dark bloc-descriptif text-right bloc-descriptif-{{ produit.id }}">
+                            <h3 class="h4">{{ produit.name }}</h3>
+                            <p>
+                                {{ produit.chapo|raw }}
+                            </p>
+                            <a href="/product/{{ produit.id }}/{{ produit.slug }}">Vue fiche descriptive</a>
+                        </div>
+                        <a class="col-lg-5 col-5 offset-1 p-0" href="/product/{{ produit.id }}/{{ produit.slug }}">
+                            <img src="/upload/img/{{ produit.image }}" alt="{{ produit.alt }}" 
+                            class="img-fluid img-bloc">
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endmacro %}

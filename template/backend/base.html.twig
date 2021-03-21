@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="/assets/css/bootstrap-toggle.min.css">
+        <link rel="stylesheet" href="/assets/css/select2.min.css">
+        <link rel="stylesheet" href="/assets/css/index.css">
+        <link rel="stylesheet" href="/assets/css/backend.css">
+        <link rel="stylesheet" href="/assets/css/form.css">
+        <link rel="stylesheet" href="/assets/fontawesome/all.min.css">
+        <link rel="shortcut icon" href="/img/favicon.jpg" type="image/x-icon">
+        <title>{{ title|default('LCI') }}</title>
+    </head>
+    <body>
+        <div class="container-fluid" id="main-container">
+            <div class="row" id="main-row">
+                <div class="col-2 bg-g-dark" id="container-left-menu">
+                    {% include "backend/basemenu/layout.html.twig" %}
+                </div>
+                <div class="col-lg-10 col-md-12">
+                    <div class="row">
+                        <div class="col-12 p-0" id="container-bar-menu">
+                            {% include "backend/basemenu/bar/default.html.twig" %}
+                        </div>
+                        <div class="col-12 p-0" id="content">
+                            <div class="row m-0">
+                                {% block body %}{% endblock body %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% include "modules/notifications.html.twig" %}
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="/assets/js/bootstrap-toggle.min.js"></script>
+        <script src="/assets/js/select2.min.js"></script>
+        <script src="/assets/js/notifications.js"></script>
+        <script src="/assets/js/index.js"></script>
+        <script src="/assets/js/back.js"></script>
+        {% block javascripts %}{% endblock javascripts %}
+    </body>
+</html>

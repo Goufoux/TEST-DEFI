@@ -1,0 +1,152 @@
+<section id="menu-bloc-navigation" class="menu-bloc col-12">
+    <div id="navigation-container">
+        <a href="/" class="navigation-group">
+            <span class="navigation-link">
+                <i class="fas fa-reply"></i>
+                Retour au site
+            </span>
+        </a>
+        <a href="/admin/" class="navigation-group">
+            <span class="navigation-link">
+                <i class="fas fa-tasks"></i>
+                Tableau de bord
+            </span>
+        </a>
+        {% if 'contenu' in app.routeur.routeName %}
+            <a href="/admin/contenu/" class="navigation-group active">
+                <span class="navigation-link">
+                    <i class="fas fa-folder-open"></i>                    
+        {% else %}
+            <a href="/admin/contenu/" class="navigation-group">
+                <span class="navigation-link">
+                    <i class="fas fa-folder"></i>
+        {% endif %}
+                    Gestion contenu
+                </span>
+        </a>
+        {% if app.auth.role('ROLE_SUPER_ADMIN') %}
+            {% if 'menu' in app.routeur.routeName and 'group' not in app.routeur.routeName %}
+                <a href="/admin/menu/" class="navigation-group active">
+                    <span class="navigation-link">
+                        <i class="fas fa-folder-open"></i>                    
+                    {% else %}
+                <a href="/admin/menu/" class="navigation-group">
+                    <span class="navigation-link">
+                        <i class="fas fa-folder"></i>
+                    {% endif %}
+                    Gestion menu
+                </span>
+            </a>
+            {% if 'menu' in app.routeur.routeName %}    
+            {% if 'menu' in app.routeur.routeName and 'group' in app.routeur.routeName %}
+            <a href="/admin/menu/group" class="navigation-group sub active">
+                <span class="navigation-link sub">
+                    <i class="fas fa-folder-open"></i>                    
+            {% else %}
+            <a href="/admin/menu/group" class="navigation-group sub">
+                <span class="navigation-link sub">
+                    <i class="fas fa-folder"></i>
+            {% endif %}
+                    Gestion des groupes
+                </span>
+            </a>
+        {% endif %}
+        {% endif %}
+        {% if 'product' in app.routeur.routeName %}
+            <a href="/admin/product/" class="navigation-group active">
+                <span class="navigation-link">
+                    <i class="fas fa-folder-open"></i>                    
+            {% else %}  
+            <a href="/admin/product/" class="navigation-group">
+                <span class="navigation-link">
+                    <i class="fas fa-folder"></i>
+            {% endif %}
+                Gestion des produits
+            </span>
+        </a>
+        {% if 'actualite' in app.routeur.routeName and 'archive' not in app.routeur.routeName %}
+        <a href="/admin/actualite/" class="navigation-group active">
+            <span class="navigation-link">
+                <i class="fas fa-folder-open"></i>                    
+        {% else %}
+        <a href="/admin/actualite/" class="navigation-group">
+            <span class="navigation-link">
+                <i class="fas fa-folder"></i>
+        {% endif %}
+                Gestion des actualités
+            </span>
+        </a>
+        {% if 'actualite' in app.routeur.routeName %}    
+            {% if 'actualite' in app.routeur.routeName and 'archive' in app.routeur.routeName %}
+            <a href="/admin/actualite/archive" class="navigation-group sub active">
+                <span class="navigation-link sub">
+                    <i class="fas fa-folder-open"></i>                    
+            {% else %}
+            <a href="/admin/actualite/archive" class="navigation-group sub">
+                <span class="navigation-link sub">
+                    <i class="fas fa-folder"></i>
+            {% endif %}
+                    Actualités archivées
+                </span>
+            </a>
+        {% endif %}
+        {% if app.auth.role('ROLE_SUPER_ADMIN') %}
+        {% if 'uploader' in app.routeur.routeName %}
+            <a href="/admin/uploader/" class="navigation-group active">
+                <span class="navigation-link">
+                    <i class="fas fa-folder-open"></i>                    
+            {% else %}
+            <a href="/admin/uploader/" class="navigation-group">
+                <span class="navigation-link">
+                    <i class="fas fa-folder"></i>
+            {% endif %}
+                    Uploader
+                </span>
+            </a>
+        {% endif %}
+        {% if 'rubrique' in app.routeur.routeName %}
+        <a href="/admin/rubrique/" class="navigation-group active">
+            <span class="navigation-link">
+                <i class="fas fa-folder-open"></i>
+        {% else %}
+        <a href="/admin/rubrique/" class="navigation-group">
+            <span class="navigation-link">
+                <i class="fas fa-folder"></i>
+        {% endif %}
+                Gestion des rubriques
+            </span>
+        </a>
+        {% if 'formulaire' in app.routeur.routeName %}
+        <a href="/admin/formulaire/" class="navigation-group active">
+            <span class="navigation-link">
+                <i class="fas fa-folder-open"></i>
+        {% else %}
+        <a href="/admin/formulaire/" class="navigation-group">
+            <span class="navigation-link">
+                <i class="fas fa-folder"></i>
+        {% endif %}
+                Gestion des formulaires
+            </span>
+        </a>
+        {% if app.auth.role('ROLE_SUPER_ADMIN') %}
+            {% if 'connexion' in app.routeur.routeName %}
+            <a href="/admin/connexion/" class="navigation-group active">
+                <span class="navigation-link">
+                    <i class="fas fa-folder-open"></i>
+            {% else %}
+            <a href="/admin/connexion/" class="navigation-group">
+                <span class="navigation-link">
+                    <i class="fas fa-folder"></i>
+            {% endif %}
+                    Dernières connexions
+                </span>
+            </a>
+        {% endif %}
+        <a href="/logout" class="navigation-group">
+            <span class="navigation-link">
+                <i class="fas fa-sign-out-alt"></i>
+                Se déconnecter
+            </span>
+        </a>
+    </div>
+</section>

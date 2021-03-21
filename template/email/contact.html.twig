@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+    </head>
+    <body>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                width: 100%;
+                min-height: 500px;
+            }
+            #header {
+                border-bottom: 1px solid grey;
+                padding: 15px 0px;
+                background: #00509c;
+                width: 100%;
+                margin-bottom: 35px;
+            }
+            #header h1 {
+                text-align: center;
+                color: #A2A2A2;
+                text-transform: uppercase;
+                width: 100%;
+                letter-spacing: 1px;
+            }
+            #post-header, #content {
+                width: 80%;
+                margin: auto;
+            }
+            div.col-6 {
+                display: inline-block;
+                width: 45%;
+                margin: auto;
+            }
+            #footer {
+                background: #E9E9E9;
+                margin-top: 50px;
+                width: 100%;
+                padding: 30px;
+                font-size: 15px;
+            }
+            a {
+                text-decoration: none;
+                color: #ffa500 !important;
+                font-weight: bold;
+            }
+        </style>
+        <section id="main">
+            <div id="header">
+                <h1>
+                    LCI Packaging : {{ title }}
+                </h1>
+            </div>
+            <div id="post-header">
+                <p>
+                    Bonjour, <br>
+                    Un formulaire de {{ title }} a été posté sur votre site 
+                    <a href="https://lci.genarkys.fr" target="_blank" rel="noreferrer noopenner">LCI Packaging</a>.
+                </p>
+            </div>
+            <div id="content">
+                Voici le contenu du formulaire : <br>
+                <b>Informations</b> <br>
+                <div class="col-6">
+                    <ul>
+                        <li>
+                            Nom : {{ data['name'] }}
+                        </li>
+                        <li>
+                            Prénom : {{ data['first_name'] }}
+                        </li>
+                        <li>
+                            Adresse e-mail : {{ data['email'] }}
+                        </li>
+                        <li>
+                            Téléphone : {{ data['phone'] }}
+                        </li>
+                        <li>
+                            Société : {{ data['company'] }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <ul>
+                        <li>
+                            Adresse : {{ data['address'] }}
+                        </li>
+                        <li>
+                            Code Postal : {{ data['code_postal'] }}
+                        </li>
+                        <li>
+                            Ville : {{ data['city'] }}
+                        </li>
+                        <li>
+                            Pays : {{ data['country'] }}
+                        </li>
+                        <li>
+                            Provenance :
+                            {% if data['country'] == 1 %}
+                                A l'aide d'un moteur de recherche
+                            {% elseif data['country'] == 2 %}
+                                Pages jaunes
+                            {% elseif data['country'] == 3 %}
+                                Plaquette publicitaire
+                            {% elseif data['country'] == 4 %}
+                                Salon
+                            {% else %}
+                                Autre
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div>
+                {% if data['devis_form'] is defined %}
+                <div>
+                    <b>Informations concernant le devis</b> <br>
+                    <div class="col-6">
+                        <ul>
+                            <li>
+                                Longueur (A) : {{ data['dim_longueur']}}
+                            </li>
+                            <li>
+                                Largeur (B) : {{ data['dim_largeur']}}
+                            </li>
+                            <li>
+                                Hauteur (H) : {{ data['dim_hauteur']}}
+                            </li>
+                            <li>
+                                Poids du produit : {{ data['product_weight']}}
+                            </li>
+                            <li>
+                                Type d'emballage :
+                                {% if data['type_emballage'] == 1 %}
+                                    Boîte
+                                {% elseif data['type_emballage'] == 2 %}
+                                    Etui
+                                {% elseif data['type_emballage'] == 3 %}
+                                    Fond et couvercle
+                                {% elseif data['type_emballage'] == 4 %}
+                                    Tiroir et fourreau
+                                {% elseif data['type_emballage'] == 5 %}
+                                    Barquette
+                                {% elseif data['type_emballage'] == 6 %}
+                                    Pochette
+                                {% elseif data['type_emballage'] == 7 %}
+                                    Valisette
+                                {% elseif data['type_emballage'] == 8 %}
+                                    Boîte présentoir
+                                {% elseif data['type_emballage'] == 9 %}
+                                    PLV
+                                {% elseif data['type_emballage'] == 10 %}
+                                    Calage
+                                {% elseif data['type_emballage'] == 11 %}
+                                    Plaque
+                                {% elseif data['type_emballage'] == 12 %}
+                                    Autres
+                                {% elseif data['type_emballage'] == 13 %}
+                                    Je ne sais pas
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul>
+                            <li>
+                                Finition :
+                                {% if data['finition'] == 1 %}
+                                    Sans impression
+                                {% elseif data['finition'] == 2 %}
+                                    Impression quadri
+                                {% elseif data['finition'] == 3 %}
+                                    Impression 2 couleur
+                                {% elseif data['finition'] == 4 %}
+                                    Impression 1 couleur
+                                {% elseif data['finition'] == 5 %}
+                                    Autres
+                                {% endif %}
+                            </li>
+                            <li>
+                                Quantité par livraison : {{ data['quantity'] }}
+                            </li>
+                            <li>
+                                Besoin annuel : {{ data['annual_need'] }}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                <div id="dataContent">
+                    <b>Message</b> <br>
+                    {{ data['content'] }}
+                </div>
+            </div>
+            <div id="footer">
+                Formulaire envoyé le {{ today|date("d/m/Y à H:i:s") }} <br>
+                Vous constatez un problème ? <a href="mailto:quentin@narbeytm.com" target="_blank" 
+                rel="noreferrer noopenner">Prendre contact</a> <br>
+                <br>
+                <br>
+                Envoyé depuis l'adresse IP : {{ server['REMOTE_ADDR'] }} <br>
+                Navigateur : {{ server['HTTP_USER_AGENT'] }} <br>
+            </div>
+        </section>    
+    </body>
+</html>

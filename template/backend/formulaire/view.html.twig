@@ -1,0 +1,110 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-10 col-md-10 col-sm-12 mx-auto h2 my-3">
+    <i class="fas fa-list"></i>
+    Formulaire #{{ contact.id }}, <span class="h4 text-muted">posté le {{ contact.createdAt|date('d/m/Y') }}</span>
+</h1>
+<section class="col-lg-10 col-md-10 col-12 mx-auto my-3">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-12 py-3 bg-g-dark">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    {% if contact.gender == '1' %}
+                        {% set gender = 'Mme' %}
+                    {% else %}
+                        {% set gender = 'M' %}
+                    {% endif %}
+                    <b>Identité:</b> {{ gender ~ ' ' ~ contact.name ~ ' ' ~ contact.firstName }} 
+                </li>
+                <li class="list-group-item">
+                    <b>Société :</b> {{ contact.company }}
+                </li>
+                <li class="list-group-item">
+                    <b>Adresse :</b> {{ contact.address ~ ', ' ~ contact.city ~ ', ' ~ contact.codePostal ~ ', ' ~ contact.country }}
+                </li>
+                <li class="list-group-item">
+                    <b>Téléphone :</b> {{ contact.phone }}
+                </li>
+                <li class="list-group-item">
+                    <b>Email :</b> {{ contact.email }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 col-12 py-3 bg-g-dark">
+            <div class="row">
+                <h2 class="h5 col-12 text-white">Provenance</h2>
+                <p class="col-12 text-white">
+                    {{ contact.provenance }}
+                </p>
+                {% if contact.contactDevis.id is null %}
+                    <h2 class="h5 col-12 text-white">Message</h2>
+                    <p class="col-12 text-white">
+                        {{ contact.content|raw }}
+                    </p>
+                {% else %}
+                    <h2 class="h5 col-12 text-white">Informations</h2>
+                    <div class="rounded col-12 py-2">
+                        <div class="row">
+                            <div class="col-lg-6 col-12 my-2">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <b>Poids du produit :</b> {{ contact.contactDevis.productWeight }} grs
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Type d'emballage :</b> {{ contact.contactDevis.typeEmballage }}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Finition : </b> {{ contact.contactDevis.finition }}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Quantité : </b> {{ contact.contactDevis.quantity }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 col-12 my-2">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <b>Longueur : </b> {{ contact.contactDevis.dimLongueur }} mm
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Largeur : </b> {{ contact.contactDevis.dimLargeur }} mm
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Hauteur : </b> {{ contact.contactDevis.dimHauteur }} mm
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Besoin annuel : </b> {{ contact.contactDevis.annualNeed }}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>      
+                {% endif %}
+            </div>
+        </div>
+        {% if contact.contactDevis.id is not null %}
+        <div class="col-lg-10 col-sm-12 bg-g-dark my-3 py-2 text-white">
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <h2 class="h4">Message</h2>
+                    <p>
+                        {{ contact.content|raw }}
+                    </p>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <h2 class="h4">Pièce jointe</h2>
+                    {% if contact.contactDevis.path is null %}
+                        pas de pièce jointe
+                    {% else %}
+                        <a href="/upload/all/{{ contact.contactDevis.path }}" target="_blank">
+                            <i class="fas fa-file fa-2x"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock body %}

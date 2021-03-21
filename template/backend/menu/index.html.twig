@@ -1,0 +1,227 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-10 col-md-10 col-sm-12 mx-auto h2 my-3">
+    <i class="fas fa-list"></i>
+    Gestion du menu
+    <div class="float-right">
+        <a href="/admin/menu/new" class="btn btn-info">
+            <i class="fas fa-plus"></i>
+        </a>
+    </div>
+</h1>
+{% if elements is empty %}
+<div class="alert alert-info col-lg-8 col-md-10 col-sm-12 mx-auto">
+    <h2 class="h3">
+        <i class="fas fa-info-circle"></i>
+        Aucun élément.
+    </h2>
+    <div>
+        <a href="/admin/menu/new" class="btn btn-success">
+            <i class="fas fa-plus"></i>
+            Ajouter des éléments
+        </a>
+    </div>
+</div>
+{% else %}
+<section class="col-lg-10 col-md-10 col-sm-12 mx-auto">
+    <div class="row">
+        <div class="col-12 my-2">
+            {% if brand is not null %}
+                Élément principal : {{ brand.name }}
+                <a href="/admin/menu/update/{{ brand.id }}" class="btn btn-info btn-sm">
+                    <i class="fas fa-pen"></i>
+                </a>
+                <a href="/admin/menu/remove/{{ brand.id }}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-trash"></i>
+                </a>
+            {% else %}
+                Élément principal: Aucun
+                <a href="/admin/menu/new?brand=1" class="btn btn-info btn-sm">
+                    <i class="fas fa-plus"></i>
+                    Ajouter
+                </a>
+            {% endif %}
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-12 mx-auto my-2">
+        {% for groups in singles %}
+            {% if groups['element']|length > 1 and groups['menuGroup'] is null %}
+                <div class="rounded bg-g-dust p-2 text-white my-2">
+                    <h3 class="h4 text-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Ses éléments ont la même position.
+                    </h3>
+                    {% for element in groups['element'] %}
+                        <div class="mb-2">
+                            <div class="row">
+                                {% if element.menuGroup.id is not null %}
+                                <div class="col">
+                                    <h4 class="h5">
+                                        {{ element.name }}
+                                        <span class="badge badge-info" data-toggle="tooltip" title="Groupe">
+                                            {{ element.menuGroup.name }}
+                                        </span>
+                                    </h4>
+                                </div>
+                                <form action="#" method="POST" class="col">
+                                    <input type="hidden" name="menuGroup" value="{{ element.menuGroup.id }}">
+                                    <div class="form-row">
+                                        <div class="col-3">
+                                            <input type="number" class="form-control" name="ordre" id="ordre" value="{{ element.menuGroup.ordre }}">
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% else %}
+                                <div class="col">
+                                    <h4 class="h5">
+                                        {{ element.name }}
+                                    </h4>
+                                </div>
+                                <form action="#" method="POST" class="col">
+                                    <input type="hidden" name="menu" value="{{ element.id }}">
+                                    <div class="form-row">
+                                        <div class="col-3">
+                                            <input type="number" class="form-control" name="ordre" id="ordre" value="{{ element.ordre }}">
+                                        </div>
+                                        <div class="col-1">
+                                            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {% if groups['element']|length > 1 %}
+                    {% for group in groups['element'] %}
+                        {% set element = group %}
+                        <div class="bg-g-dark p-2 text-white my-2 rounded">
+                            <div class="row">
+                                {% if element.menuGroup.id is null %}
+                                <div class="col-6">
+                                    <h4 class="h5 ml-lg-3">
+                                        {{ element.name }}
+                                    </h4>
+                                </div>
+                                <form action="#" method="POST" class="col-5">
+                                    <input type="hidden" name="menu" value="{{ element.id }}">
+                                    <div class="form-row">
+                                        <div class="col-3">
+                                            <input type="number" class="form-control" name="ordre" id="ordre" value="{{ element.ordre }}">
+                                        </div>
+                                        <div class="col-2 mx-1">
+                                            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                        </div>
+                                        <div class="col-2 mx-1">
+                                            <a href="/admin/menu/update/{{ element.id }}" class="btn btn-info btn-sm">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-2 mx-1">
+                                            <a href="/admin/menu/remove/{{ element.id }}" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% else %}
+                                <div class="col">
+                                    <h4 class="h5">
+                                        {{ element.name }}
+                                        <span class="badge badge-info" data-toggle="tooltip" title="Groupe">
+                                            {{ element.menuGroup.name }}
+                                        </span>
+                                    </h4>
+                                </div>
+                                <form action="#" method="POST" class="col">
+                                    <input type="hidden" name="menu" value="{{ element.id }}">
+                                    <div class="form-row">
+                                        <div class="col-3">
+                                            <input type="number" class="form-control" name="ordre" id="ordre" value="{{ element.ordre }}">
+                                        </div>
+                                        <div class="col-2 mx-1">
+                                            <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                        </div>
+                                        <div class="col-2 mx-1">
+                                            <a href="/admin/menu/update/{{ element.id }}" class="btn btn-info btn-sm">
+                                                <i class="fas fa-pen"></i>
+                                            </a>
+                                        </div>
+                                        <div class="col-2 mx-1">
+                                            <a href="/admin/menu/remove/{{ element.id }}" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                {% set element = groups['element'][0] %}
+                <div class="bg-g-dark p-2 text-white my-2 rounded">
+                    <div class="row">
+                        {% if element.menuGroup.id is null %}
+                        <div class="col-6">
+                            <h4 class="h5 ml-lg-3">
+                                {{ element.name }}
+                            </h4>
+                        </div>
+                        <form action="#" method="POST" class="col-5">
+                            <input type="hidden" name="menu" value="{{ element.id }}">
+                            <div class="form-row">
+                                <div class="col-3">
+                                    <input type="number" class="form-control" name="ordre" id="ordre" value="{{ element.ordre }}">
+                                </div>
+                                <div class="col-2 mx-1">
+                                    <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                </div>
+                                <div class="col-2 mx-1">
+                                    <a href="/admin/menu/update/{{ element.id }}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                </div>
+                                <div class="col-2 mx-1">
+                                    <a href="/admin/menu/remove/{{ element.id }}" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                        {% else %}
+                        <div class="col">
+                            <h4 class="h5">
+                                {{ element.name }}
+                                <span class="badge badge-info" data-toggle="tooltip" title="Groupe">
+                                    {{ element.menuGroup.name }}
+                                </span>
+                            </h4>
+                        </div>
+                        <form action="#" method="POST" class="col">
+                            <input type="hidden" name="menuGroup" value="{{ element.menuGroup.id }}">
+                            <div class="form-row">
+                                <div class="col-3">
+                                    <input type="number" class="form-control" name="ordre" id="ordre" value="{{ element.menuGroup.ordre }}">
+                                </div>
+                                <div class="col-1">
+                                    <button class="btn btn-success btn-sm"><i class="fas fa-check"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock body %}

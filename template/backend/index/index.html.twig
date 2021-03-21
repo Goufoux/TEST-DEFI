@@ -1,0 +1,71 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="h2 col-lg-10 col-12 my-3 mx-auto">
+    Tableau de bord
+    <div class="float-right">
+        <a href="/admin/restore" class="btn btn-outline-secondary">
+            Restauration
+        </a>
+    </div>
+</h1>
+<div class="col-lg-10 col-12 mx-auto">
+    <div class="row">
+        <a href="/admin/contenu" class="col-lg-5 col-md-6 col-12 mx-auto bg-g-dark text-white py-2 my-2">
+            <h2 class="h4">
+                Gestion du contenu
+            </h2>
+            <p class="text-muted">
+                Ajouter, modifier et supprimer des pages de contenu.
+            </p>
+            <p class="badge badge-orange p-2">Nombre de page : {{ contenus|length }}</p>
+        </a>
+        <a href="/admin/product" class="col-lg-5 col-md-6 col-12 mx-auto bg-g-dark text-white py-2 my-2">
+            <h2 class="h4">
+                Gestion des produits
+            </h2>
+            <p class="text-muted">
+                Ajouter, modifier et supprimer des produits.
+            </p>
+            <p class="badge badge-orange p-2">
+                Nombre de produit : {{ produits|length }}</p>
+            </p>
+        </a>
+        <a href="/admin/actualite" class="col-lg-5 col-md-6 col-12 mx-auto bg-g-dark text-white py-2 my-2">
+            <h2 class="h4">
+                Gestion des actualités
+            </h2>
+            <p class="text-muted">
+                Ajouter, modifier et supprimer des actualités. <br />
+                Vous pouvez également archiver ou programmer des actualités.
+            </p>
+            <p class="badge badge-orange p-2">Nombre d'actualité : {{ actualites|length }}</p>
+        </a>
+        <a href="/admin/formulaire" class="col-lg-5 col-md-6 col-12 mx-auto bg-g-dark text-white py-2 my-2">
+            <h2 class="h4">Formulaire de contact et de devis</h2>
+            <p class="text-muted">
+                Consulter les formulaires envoyés depuis le site.
+            </p>
+            <p class="badge badge-orange p-2">
+                Nombre de formulaire : {{ contacts|length }}
+            </p>
+            {% if unchecked == 1 %}
+            <p class="badge badge-danger p-2">
+                <i class="fas fa-exclamation-triangle"></i>
+                Un formulaire est en attente de consultation.
+            </p>
+            {% elseif unchecked > 1 %}
+            <p class="badge badge-danger p-2">
+                <i class="fas fa-exclamation-triangle"></i>
+                Plusieurs formulaires sont en attente de consultation.
+            </p>
+            {% elseif contacts|length > 0 %}
+            <p class="badge badge-success p-2">
+                <i class="fas fa-check-circle"></i>
+                Tout les formulaires ont été consultés.
+            </p>
+            {% endif %}
+        </a>
+    </div>
+</div>
+{% endblock body %}

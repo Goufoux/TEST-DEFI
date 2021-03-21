@@ -1,0 +1,4 @@
+; developpement.ini
+dbName = 'your-dbName'
+user = 'your-user'
+password = 'your-password'

@@ -1,0 +1,115 @@
+<div id="menu-mobile" class="d-lg-none d-block">
+    <button class="navbar-toggler toggler-mobile" type="button">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="bloc-logo">
+        <img src="/img/nav-logo.png" class="logo-mobile img-fluid" alt="Logo menu" />
+    </div>
+    <div class="float-right mr-3">
+        <a href="/contact">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+</div>
+<div id="content-menu-mobile" class="d-lg-none">
+    <div class="close-tabs float-right mr-3 mt-2">
+        <i class="fas fa-times"></i>
+    </div>
+    <div class="mob-menu mt-5" data-target="societe">
+        <h3 class="h5">
+            Société
+            <div class="float-right mr-2">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </h3>
+    </div>
+    <div class="mob-sub-menu" id="societe">
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" href="/contenu/15/bien-choisir-votre-emballage">Bien choisir votre emballage</a>
+            <a class="list-group-item list-group-item-action" href="/contenu/17/avantages-clients">Avantages clients</a>
+            <a class="list-group-item list-group-item-action" href="/contenu/18/moyens-de-production">Moyens de production</a>
+            <a class="list-group-item list-group-item-action" href="/contenu/19/image-amp-communication">Image & communication</a>
+            <a class="list-group-item list-group-item-action" href="/contenu/20/partenaires">Partenaires</a>
+            <a class="list-group-item list-group-item-action" href="/actualite">Actualités</a>
+        </div>
+    </div>
+    <div class="mob-menu" data-target="marche">
+        <h3 class="h5">
+            Marché
+            <div class="float-right mr-2">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </h3>
+    </div>
+    <div class="mob-sub-menu" id="marche">
+        {% if rubriques is empty %}
+        <span class="badge badge-info p-2 d-block w-25 mx-auto">
+            Aucune rubrique
+        </span>
+        {% else %}
+        <div class="list-group">
+            {% for rubrique in rubriques if rubrique.type == 1 %}
+                <a href="/rubrique/{{ rubrique.slug }}" class="list-group-item list-group-item-action">
+                    {{ rubrique.name }}
+                </a>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mob-menu" data-target="produit">
+        <h3 class="h5">
+            Produits
+            <div class="float-right mr-2">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </h3>
+    </div>
+    <div class="mob-sub-menu" id="produit">
+        {% if rubriques is empty %}
+        <span class="badge badge-info p-2 d-block w-25 mx-auto">
+            Aucune rubrique
+        </span>
+        {% else %}
+        <div class="list-group">
+            {% for rubrique in rubriques if rubrique.type == 2 %}
+                <a href="/rubrique/{{ rubrique.slug }}" class="list-group-item list-group-item-action">
+                    {{ rubrique.name }}
+                </a>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="mob-menu" data-target="specialite">
+        <h3 class="h5">
+            Spécialité
+            <div class="float-right mr-2">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </h3>
+    </div>
+    <div class="mob-sub-menu" id="specialite">
+        {% if rubriques is empty %}
+        <span class="badge badge-info p-2 d-block w-25 mx-auto">
+            Aucune rubrique
+        </span>
+        {% else %}
+        <div class="list-group">
+            {% for rubrique in rubriques if rubrique.type == 3 %}
+                <a href="/rubrique/{{ rubrique.slug }}" class="list-group-item list-group-item-action">
+                    {{ rubrique.name }}
+                </a>
+            {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+    <a href="/contact" class="external-menu">
+        <h3 class="h5">
+            Contact
+        </h3>
+    </a>
+    <a href="/contact?type=devis" class="external-menu">
+        <h3 class="h5">
+            Devis
+        </h3>
+    </a>
+</div>

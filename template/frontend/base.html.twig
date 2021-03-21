@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block meta_description %}
+            <meta description="LCI">
+        {% endblock meta_description %}
+        <link rel="stylesheet" href="/assets/css/index.css">
+        <link rel="stylesheet" href="/assets/css/front.css">
+        <link rel="stylesheet" href="/assets/css/form.css">
+        <link rel="stylesheet" href="/assets/css/custom.css">
+        <link rel="stylesheet" href="/assets/fontawesome/all.min.css">
+        <link rel="stylesheet" href="/assets/drift-master/dist/drift-basic.min.css">
+        <link rel="shortcut icon" href="/img/favicon.jpg" type="image/x-icon">
+        <title>{{ title|default('LCI - Le Cartonnage Industriel') }}</title>
+    </head>
+    <body class="bg-g-gray-3">
+        {% include "frontend/menu/menu-mobile.html.twig" %}
+        <div class="container-fluid">
+            <div class="row" id="head-row">
+                {% include "frontend/menu/menu.html.twig" %}
+                <section id="head-block" class="col-12 head-block">
+                    <div class="row">
+                        {% block head_block %}{% endblock head_block %}
+                    </div>
+                </section>
+            </div>
+            <div id="content_row" class="row">
+                <div class="col-lg-11 col-12 mx-auto bg-white ref-footer-div">
+                    <div class="row">
+                        <section id="left-column" class="col-2 mx-auto mt-4 h-100">
+                            <div class="row">
+                                {% include "frontend/bloc/bloc.rubrique.html.twig" %}
+                            </div>
+                            <div class="row">
+                                <div class="bloc-projet bg-g-gray-3 col-12">
+                                    <div class="row">
+                                        <h3 class="h4 small-caps text-center col-12">Vous avez un projet ?</h3>
+                                        <a href="/contact" class="btn btn-orange mx-auto d-block mb-2">CONTACTEZ-NOUS</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                {% include "frontend/bloc/bloc.contact.html.twig" %}
+                            </div>
+                        </section>
+                        <div class="col-lg-9 mx-auto col-12">
+                            <div class="row">
+                                <div id="main_content" class="col-12">
+                                    {% block main_content %}{% endblock main_content %}
+                                </div>
+                                <div id="second_content" class="col-12">
+                                    {% block second_content %}{% endblock second_content %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include "frontend/footer/footer.html.twig" %}
+        </div>
+        {% include "modules/notifications.html.twig" %}
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="/assets/js/index.js"></script>
+        <script src="/assets/js/notifications.js"></script>
+        {% block javascripts %}{% endblock javascripts %}
+    </body>
+</html>

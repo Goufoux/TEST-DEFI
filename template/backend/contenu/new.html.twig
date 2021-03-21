@@ -1,0 +1,97 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-8 col-md-10 col-12 my-3 mx-auto h3">
+    <i class="fas fa-plus-circle"></i>
+    Nouveau contenu
+</h1>
+<form action="#" method="POST" class="col-lg-8 col-md-10 col-12 mx-auto mt-2 mb-5">
+    <div class="form-row">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label for="title" class="input-group-text">Titre</label>
+            </div>
+            <input type="text" name="title" data-form="title" data-help="titleHelp" placeholder="Titre de la page" required id="title" class="form-control form-count" data-min="3" data-max="80"
+            {% if request.post('title') %}
+                value="{{ request.post('title') }}"
+            {% endif %}>
+            <span id="titleHelp" class="form-text text-muted">
+                <i class="fas fa-info-circle"></i>
+                Le titre doit être compris entre 3 et 80 caractères.
+            </span>
+            {% if form.errors('title') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('title') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-12 bg-g-dark py-2 rounded mb-3">
+            <div class="row">
+                <h2 class="h5 col-12 text-white">
+                    <i class="fas fa-search"></i>
+                    Référencement
+                </h2>
+                <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <label for="meta_title" class="input-group-text">Meta titre</label>
+                    </div>
+                    <input type="text" name="meta_title" data-form="title" data-help="metatitleHelp" data-min="3" data-max="80" id="meta_title" required placeholder="Titre utilisé pour le référencement" class="form-control form-count"
+                    {% if request.post('meta_title') %}
+                        value="{{ request.post('meta_title') }}"
+                    {% endif %}>
+                    <span id="metatitleHelp" class="form-text text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        Le meta titre doit être compris entre 3 et 80 caractères.
+                    </span>
+                    {% if form.errors('meta_title') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('meta_title') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group col-12">
+                    <label for="meta_description" class="text-white">Meta description</label>
+                    {% if request.post('meta_description') %}
+                        {% set textarea = request.post('meta_description', false) %}
+                    {% else %}
+                        {% set textarea = '' %}
+                    {% endif %}
+                    <textarea name="meta_description" data-help="metadescHelp" data-form="meta-desc" data-min="10" data-max="165" required id="meta_description" rows="3" class="form-control form-count" placeholder="Description utilisé pour le référencement">{{ textarea }}</textarea>
+                    <span id="metadescHelp" class="form-text text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        La meta description doit être comprise entre 10 et 165 caractères.
+                    </span>
+                    {% if form.errors('meta_description') %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('meta_description') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-12 mb-3">
+            <label for="my-selector">Contenu</label>
+            {% if request.post('content') %}
+                {% set textarea = request.post('content', false) %}
+            {% else %}
+                {% set textarea = '' %}
+            {% endif %}
+            <textarea name="content" id="my-selector" rows="20" class="form-control">{{ textarea }}</textarea>
+            {% if form.errors('content') %}
+                <div class="form-errors">
+                    <span class="badge badge-danger">{{ form.errors('content') }}</span>
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group col-12 text-right">
+            <input type="submit" value="Créer" class="btn btn-success">
+        </div>
+    </div>
+</form>
+{% endblock body %}
+
+{% block javascripts %}
+<script src="/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="/assets/js/tinymce.js"></script>
+<script src="/assets/js/form.js"></script>
+{% endblock javascripts %}

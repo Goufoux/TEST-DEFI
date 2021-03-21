@@ -1,0 +1,36 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block main_content %}
+    <h1 class="h2 my-3 col-lg-8 mx-auto col-md-10 col-12">
+        <i class="fas fa-sign-in-alt"></i>
+        Connexion
+    </h1>
+    <form action="#" method="POST" class="col-lg-6 col-md-8 col-12 mx-auto my-3">
+        <div class="form-row">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="email" class="input-group-text">
+                        <i class="fas fa-at"></i>
+                    </label>
+                </div>
+                <input type="email" name="email" required id="email" class="form-control" placeholder="Email">
+                {% if form.errors('email') is not empty %}
+                    <div class="form-errors">
+                        <span class="badge badge-danger">{{ form.errors('email') }}</span>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label for="password" class="input-group-text">
+                        <i class="fas fa-key"></i>
+                    </label>
+                </div>
+                <input type="password" name="password" required id="password" class="form-control" placeholder="Mot de passe">
+            </div>
+            <div class="col-12 text-right">
+                <input type="submit" value="Connexion" class="btn btn-success">
+            </div>
+        </div>
+    </form>
+{% endblock main_content %}

@@ -1,0 +1,49 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block meta_description %}
+    <meta description="{{ actualite.metaDescription }}">
+{% endblock meta_description %}
+
+{% block head_block %}
+<blockquote class="h1 col-lg-8 col-12 mx-auto text-white main-title">
+    <div class="row py-2">
+        <div class="col-10 col-12 text-center text-lg-left offset-lg-2">
+            L'Art et la Matière ®
+        </div>
+        <div class="h2 col-10 col-12 second-main-title text-center text-lg-left offset-lg-2">
+            {{ actualite.title|raw }}
+        </div>
+    </div>
+</blockquote>
+{% endblock head_block %}
+
+{% block main_content %}
+<section class="col-lg-11 col-12 mx-auto content-view pb-4">
+    <div class="row">
+        <div class="ariane-bloc col-12">
+            <a href="/actualite/" class="cat-link">Actualités</a><span> / {{ actualite.title }}</span>
+        </div>
+        <div class="col-12">
+            <span class="text-muted border border-orange border-top-0 border-right-0 border-bottom-0 pl-1">
+            Publié le 
+            {% if actualite.eventDate is not null %}
+                {{ actualite.eventDate|date("d/m/Y") }}
+            {% else %}
+                {{ actualite.createdAt|date("d/m/Y") }}
+            {% endif %}
+            </span>
+        </div>
+        <h1 class="my-3 main col-12">{{ actualite.title|raw }}</h1>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-9">
+                    {{ actualite.content|raw }}
+                </div>
+                <div class="col-3">
+                    <img src="/upload/img/{{ actualite.image }}" alt="{{ actualite.alt }}" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main_content %}

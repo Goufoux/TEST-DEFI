@@ -1,0 +1,81 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-10 col-md-10 col-sm-12 mx-auto my-3 h3">
+    <i class="fas fa-list"></i>
+    Gestion Actualités
+    <div class="float-right">
+        <a href="/admin/actualite/new" class="btn btn-primary btn-sm">
+            <i class="fas fa-plus-circle"></i>
+            Nouvelle actualité
+        </a>
+    </div>
+</h1>
+{% if actualites is empty %}
+<div class="alert alert-info col-lg-8 col-md-10 col-sm-12 mx-auto">
+    <h5 class="alert-heading">
+        <i class="fas fa-info-circle"></i>
+        Aucune actualité
+    </h5>
+    <div class="alert-body">
+        <a href="/admin/actualite/new" class="btn btn-success">
+            <i class="fas fa-plus"></i>
+            Ajouter
+        </a>
+    </div>
+</div>
+{% else %}
+<div class="col-lg-10 col-md-10 col-sm-12 mx-auto">
+    <table class="table table-striped table-dark rounded text-white">
+        <thead>
+            <th>#</th>
+            <th>Titre</th>
+            <th>
+                <i class="fas fa-calendar-day" data-toggle="tooltip" title="Date de l'événement"></i>
+            </th>
+            <th>
+                <i class="fas fa-home" data-toggle="tooltip" title="Affiché sur la page d'accueil ?"></i>
+            </th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for actualite in actualites %}
+                <tr>
+                    <td>{{ actualite.id }}</td>
+                    <td class="size-12">{{ actualite.title|raw }}</td>
+                    <td>
+                        {% if actualite.eventDate is null %}
+                            <i class="fas fa-times"></i>
+                        {% else %}
+                            {{ actualite.eventDate|date('d/m/y') }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <div class="back-actu-tg-group">
+                            <input type="checkbox" class="toggle-back-actu" data-target="{{ actualite.id }}" name="on_homepage" data-toggle="toggle" data-on="Oui" data-off="Non" data-onstyle="success" data-offstyle="danger" {% if actualite.onHomepage == '1' %}
+                            checked
+                            {% endif %}>
+                        </div>
+                    </td>
+                    <td>
+                        <a href="/actualite/id/{{ actualite.id }}/{{ actualite.slug }}" data-toggle="tooltip" title="Visualiser l'actualité">
+                            <i class="fas fa-eye mx-1 text-white"></i>
+                        </a>
+                        <a href="/admin/actualite/update/{{ actualite.id }}" data-toggle="tooltip" title="Modifier l'actualité">
+                            <i class="fas fa-pen mx-1 text-white"></i>                            
+                        </a>
+                        <a href="/admin/actualite/archiver/{{ actualite.id }}" data-toggle="tooltip" title="Archiver l'actualité">
+                            <i class="fas fa-archive mx-1 text-white"></i>
+                        </a>
+                        <a href="/admin/actualite/remove/{{ actualite.id }}" data-toggle="tooltip" title="Supprimer l'actualité">
+                            <i class="fas fa-trash mx-1 text-white"></i>                            
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+
+{% endblock body %}

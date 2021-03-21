@@ -1,0 +1,130 @@
+html {
+  height: 100%;
+  width: 100%; }
+
+body {
+  width: 100%;
+  height: 100%; }
+
+#main-container {
+  height: 100%; }
+
+#main-row {
+  height: 100%; }
+
+#container-left-menu {
+  height: auto; }
+
+#container-bar-menu {
+  height: 100%; }
+
+#content {
+  height: 100%; }
+
+@media all and (max-width: 992px) {
+  #container-left-menu {
+    display: none; } }
+a:hover {
+  text-decoration: none; }
+
+#menu-bloc-navigation {
+  padding: 0; }
+
+#navigation-container {
+  margin: 0;
+  background: linear-gradient(to left, #272838 94%, #775253 95%, #272838 96%);
+  border-bottom: 2px solid #775253; }
+
+.navigation-group {
+  background: rgba(0, 0, 0, 0);
+  display: block;
+  padding: 10px; }
+
+.navigation-group:hover {
+  background: rgba(0, 0, 0, 0.5);
+  text-decoration: none; }
+
+.navigation-group:hover .navigation-link {
+  font-weight: 500; }
+
+.navigation-link {
+  color: white;
+  margin-left: 20px; }
+
+.navigation-link:hover {
+  text-decoration: none; }
+
+.navigation-link.sub {
+  margin-left: 35px; }
+
+.navbar-brand-special .interface-nav {
+  font-size: 20px;
+  color: white;
+  text-decoration: none; }
+
+.navbar-brand-special .interface-nav:hover {
+  cursor: pointer; }
+
+.navbar-brand-special .module-nav {
+  font-size: 18px;
+  color: white;
+  text-decoration: none; }
+
+.navbar-brand-special .module-nav:hover {
+  cursor: pointer; }
+
+.navbar-brand-special .view-nav {
+  color: white;
+  text-decoration: none;
+  font-size: 16px; }
+
+.navbar-brand-special .view-nav {
+  cursor: pointer; }
+
+.navigation-group.active {
+  background: rgba(0, 0, 0, 0.35); }
+
+.bloc-infos {
+  padding: 15px 10px;
+  background: #212230;
+  width: 100%;
+  position: absolute;
+  bottom: 0%; }
+
+.back-product-table td.img-bloc {
+  max-height: 50px !important;
+  max-width: 50px !important; }
+
+.toggle-group label {
+  font-size: 14px; }
+
+#search-result {
+  max-height: 250px !important;
+  overflow: auto; }
+
+#search-result .row .wrapper {
+  position: absolute;
+  width: 86%;
+  text-align: center; }
+
+.search-row span {
+  align-self: center; }
+
+#search-result i {
+  border-radius: 40%;
+  transition: all .5s; }
+
+#search-result i:hover {
+  transform: rotate(360deg);
+  cursor: pointer; }
+
+#search-result .row .wrapper h5 {
+  color: white;
+  text-shadow: 1px 2px 3px black;
+  text-align: center;
+  word-break: break-all; }
+
+#search-result img {
+  max-height: 200px !important; }
+
+/*# sourceMappingURL=backend.css.map */

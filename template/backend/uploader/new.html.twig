@@ -1,0 +1,71 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-12 h2 mb-3">
+    <i class="fas fa-plus"></i>
+    Nouvelle image
+</h1>
+<div class="col-lg-6 col-md-12 mx-auto">
+    <div class="row">
+        <form action="#" method="POST" class="bg-g-dark p-2 rounded text-white" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <label for="name" class="input-group-text">Nom</label>
+                    </div>
+                    <input type="text" name="name" maxlength="150" placeholder="Nom de l'image" required id="name" class="form-control"
+                    {% if request.post('name') is not empty %}
+                        value="{{ request.post('name') }}"
+                    {% endif %}
+                    >
+                    {% if form.errors('name') is not empty %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('name') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group mb-3 col-12">
+                    <label for="description">Description</label>
+                    {% if request.post('description') is not empty %}
+                        {% set textarea = request.post('description') %}
+                    {% else %}
+                        {% set textarea = '' %}
+                    {% endif %}
+                    <textarea name="description" id="description" rows="2" placeholder="Ajouter une description..." class="form-control">{{ textarea }}</textarea>
+                    {% if form.errors('description') is not empty %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('description') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group mb-3 col-12">
+                    <div class="custom-file col-12">
+                        <label class="custom-file-label" for="file">Aucun fichier sélectionné</label>
+                        <input type="file" name="file" id="file" class="hide custom-input-file" required>
+                    </div>
+                    {% if form.errors('path') is not empty %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('path') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="preview-parent col-12"></div>
+                <div class="input-group mb-3 col-12">
+                    <div class="input-group-prepend">
+                        <label for="alt" class="input-group-text">Balise alt</label>
+                    </div>
+                    <input type="text" name="alt" maxlength="75" id="alt" class="form-control" placeholder="Descriptif de l'image" required>
+                    {% if form.errors('alt') is not empty %}
+                        <div class="form-errors">
+                            <span class="badge badge-danger">{{ form.errors('alt') }}</span>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="form-group col-12 text-right">
+                    <input type="submit" value="Ajouter" class="btn btn-success">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}

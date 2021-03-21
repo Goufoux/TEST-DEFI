@@ -1,0 +1,68 @@
+{% extends "backend/base.html.twig" %}
+
+{% block body %}
+<h1 class="col-lg-8 col-md-10 col-sm-12 mx-auto h2 my-3">
+    <i class="fas fa-list"></i>
+    Liste des formulaires
+</h1>
+<section class="col-lg-8 col-md-10 col-12 mx-auto my-3">
+    {% if contacts is empty %}
+        <div class="alert alert-info col-lg-6 col-md-8 col-12 my-4 mx-auto">
+            <h2 class="h5">Aucun formulaire enregistré.</h2>
+        </div>
+    {% else %}
+    <table class="table table-striped table-dark">
+        <thead>
+            <th>#</th>
+            <th>Date</th>
+            <th>Identité</th>
+            <th>Type</th>
+            <th>État</th>
+            <th></th>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.id }}</td>
+                <td>{{ contact.createdAt|date('d/m/y') }}</td>
+                <td>
+                    {% if contact.gender == '1' %}
+                        {% set gender = 'Mme' %}
+                    {% else %}
+                        {% set gender = 'M' %}
+                    {% endif %}
+                    {{ gender ~ ' ' ~ contact.name ~ ' ' ~ contact.firstName }} 
+                </td>
+                <td>
+                    {% if contact.contactDevis.id is null %}
+                        {% set type = 'Message' %}
+                    {% else %}
+                        {% set type = 'Devis' %}
+                    {% endif %}
+                    <span class="badge badge-info p-2">{{ type }}</span>
+                </td>
+                <td>
+                    {% if contact.checked == 0 %}
+                        {% set etat = 'danger' %}
+                        {% set etatMsg = 'A consulter' %}
+                    {% else %}
+                        {% set etat = 'success' %}
+                        {% set etatMsg = 'Consulté' %}
+                    {% endif %}
+                    <span class="badge badge-{{ etat }} p-2">{{ etatMsg }}</span>
+                </td>
+                <td>
+                    <a href="/admin/formulaire/{{ contact.id }}" class="mx-1">
+                        <i class="fas fa-eye ico ico-info text-white"></i>
+                    </a>
+                    <a href="/admin/formulaire/remove/{{ contact.id }}" class="mx-1">
+                        <i class="fas fa-trash ico ico-danger text-white"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</section>
+{% endblock body %}

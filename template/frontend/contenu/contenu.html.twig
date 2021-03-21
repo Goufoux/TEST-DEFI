@@ -1,0 +1,32 @@
+{% extends "frontend/base.html.twig" %}
+
+{% block meta_description %}
+    <meta description="{{ contenu.metaDescription }}">
+{% endblock meta_description %}
+
+{% block head_block %}
+<blockquote class="h1 col-lg-8 col-12 mx-auto text-white main-title">
+    <div class="row py-2">
+        <div class="col-10 col-12 text-center text-lg-left offset-lg-2">
+            L'Art et la Matière ®
+        </div>
+        <div class="h2 col-10 col-12 second-main-title text-center text-lg-left offset-lg-2">
+            {{ contenu.title|raw }}
+        </div>
+    </div>
+</blockquote>
+
+{% endblock head_block %}
+
+{% block main_content %}
+<section class="col-lg-11 col-12 mx-auto content-view-main">
+    <div class="row">
+        <h1 class="h1 col-12 my-3">
+            {{ contenu.title|raw }}
+        </h1>
+        <div class="col-12 content-view">
+            {{ contenu.content|raw }}
+        </div>
+    </div>
+</section>
+{% endblock main_content %}

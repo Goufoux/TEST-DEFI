@@ -1,0 +1,15 @@
+/** Notifications **/
+#container-notifications {
+    z-index: 500;
+    position: fixed;
+    width: auto;
+    padding: 5px;
+    bottom: 0;
+    right: 0; 
+}
+#container-notifications .toast {
+    display: block;
+}
+.toast-header {
+    display: block;
+}
